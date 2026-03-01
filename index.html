@@ -105,43 +105,58 @@
 $(document).ready(function() {
   $('body').removeClass('is-preload');
   
+  // Show landing (About page)
   function showLanding() {
     $('body').removeClass('is-article-visible');
     $('#main article').hide();
     $('#intro').show();
   }
   
-  // Start on landing
-  showLanding();
+  showLanding(); // Start here
   
-  // Open ONE modal at a time
-  $('#header nav a[href!="#intro"]').not('[href="images/beatriz_mestre_cv_26.pdf"]').click(function(e) {
+  // Research, Recommendations, Contact buttons
+  $('a[href="#work"]').click(function(e) {
     e.preventDefault();
-    var target = $(this).attr('href');
-    $('#main article').hide();  // Hide ALL
-    $(target).show();           // Show ONE
+    $('#main article').hide();
+    $('#work').show();
     $('body').addClass('is-article-visible');
   });
   
-  // About = landing
-  $('#header nav a[href="#intro"]').click(function(e) {
+  $('a[href="#recommendations"]').click(function(e) {
+    e.preventDefault();
+    $('#main article').hide();
+    $('#recommendations').show();
+    $('body').addClass('is-article-visible');
+  });
+  
+  $('a[href="#contact"]').click(function(e) {
+    e.preventDefault();
+    $('#main article').hide();
+    $('#contact').show();
+    $('body').addClass('is-article-visible');
+  });
+  
+  // About button
+  $('a[href="#intro"]').click(function(e) {
     e.preventDefault();
     showLanding();
   });
   
-  // ESC = landing
+  // ESC closes modal
   $(document).keyup(function(e) {
     if (e.keyCode === 27) showLanding();
   });
   
-  // Click outside = landing
-  $(document).on('click', function(e) {
-    if ($('body').hasClass('is-article-visible') && 
-        !$(e.target).closest('#main article').length) {
-      showLanding();
+  // Click outside closes modal
+  $(document).click(function(e) {
+    if ($('body').hasClass('is-article-visible')) {
+      if (!$(e.target).closest('#main article').length) {
+        showLanding();
+      }
     }
   });
 });
-  </script>
+</script>
+
 </body>
 </html>
