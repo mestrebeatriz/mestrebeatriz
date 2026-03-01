@@ -273,43 +273,34 @@ body.modal-open .modal-container {
 $(function() {
   $('body').removeClass('is-preload');
 
-  // Generic handler: use the href to target the right modal
   $('#header nav a[href^="#"]').on('click', function(e) {
     e.preventDefault();
+    const targetId = $(this).attr('href');
     
-    const targetId = $(this).attr('href');  // e.g. "#research"
-    
-    // Hide all modals
-    $('.modal-container').hide();
-    
-    // Show the matching one (or return to about)
+    // Just toggle body class - CSS handles everything else
     if (targetId === '#about') {
       $('body').removeClass('modal-open');
     } else {
-      $(targetId).show();  // ← This dynamically finds #research, etc.
       $('body').addClass('modal-open');
+      // Scroll to top of modal
+      $('html, body').animate({scrollTop: 0}, 300);
     }
   });
 
-  // Close on ESC
+  // ESC closes
   $(document).on('keyup', function(e) {
-    if (e.key === 'Escape') {
-      $('.modal-container').hide();
-      $('body').removeClass('modal-open');
-    }
+    if (e.key === 'Escape') $('body').removeClass('modal-open');
   });
 
-  // Close when clicking outside modal content
+  // Outside click closes
   $(document).on('click', function(e) {
-    if ($('body').hasClass('modal-open')) {
-      if (!$(e.target).closest('.modal-content, #header nav').length) {
-        $('.modal-container').hide();
-        $('body').removeClass('modal-open');
-      }
+    if ($('body').hasClass('modal-open') && !$(e.target).closest('.modal-content, #header nav').length) {
+      $('body').removeClass('modal-open');
     }
   });
 });
 </script>
+
 
 </body>
 </html>
