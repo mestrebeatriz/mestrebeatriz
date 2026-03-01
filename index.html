@@ -71,7 +71,7 @@ a:hover { color: #ffffff; }
       <!-- LANDING -->
       <article id="about">
         <h2>About</h2>
-        p>Hi! I'm Beatriz :)<br>I’m a philosophy grad student based in Lisbon, working at the intersection of philosophy of mathematics, cognition, and AI. My research focuses mainly on the limits of computation (human or artificial) and on how formal theories of logic and mathematics relate to real cognition.</p>
+        <p>Hi! I'm Beatriz :)<br>I’m a philosophy grad student based in Lisbon, working at the intersection of philosophy of mathematics, cognition, and AI. My research focuses mainly on the limits of computation (human or artificial) and on how formal theories of logic and mathematics relate to real cognition.</p>
         <p>Since publishing my first paper at 21 (literature is my second passion!) and later joining the same journal as a reviewer, I became especially invested in the art of clear argumentation, careful writing, and collaborative academic work.</p>
         <span class="image main"><img src="images/IMG_1.jpeg" alt="Beatriz" /></span>
         <p>This is me when I got into uni! (About 5 years ago hehe)</p>
@@ -122,30 +122,31 @@ a:hover { color: #ffffff; }
 $(document).ready(function() {
   $('body').removeClass('is-preload');
   
-  // Clear all handlers
+  // Clear all handlers first
   $(document).off('click');
   
+  // Navigation clicks
   $('a[href*="#"]').click(function(e) {
     e.preventDefault();
     e.stopImmediatePropagation();
     
     var target = $(this).attr('href');
     
-    // Hide everything
+    // Close all modals first
     $('.modal-container article').removeClass('active');
     $('body').removeClass('modal-open');
     
     if (target === '#about') {
-      // Show landing
+      // Landing page
       $('#about').show();
     } else {
-      // Show ONE modal
-      $(target + ' .modal-content').addClass('active');
+      // Open ONE modal
+      $('#' + target.substring(1) + ' .modal-content').addClass('active');
       $('body').addClass('modal-open');
     }
   });
   
-  // ESC
+  // ESC closes modal
   $(document).keyup(function(e) {
     if (e.which === 27) {
       $('.modal-container article').removeClass('active');
@@ -154,15 +155,16 @@ $(document).ready(function() {
     }
   });
   
-  // Outside click
+  // Click outside closes modal
   $(document).click(function(e) {
-    if ($('body').hasClass('modal-open') && !$(e.target).closest('.modal-container').length) {
+    if ($('body').hasClass('modal-open') && !$(e.target).closest('.modal-container, #header nav').length) {
       $('.modal-container article').removeClass('active');
       $('body').removeClass('modal-open');
       $('#about').show();
     }
   });
 });
-  </script>
+</script>
+
 </body>
 </html>
