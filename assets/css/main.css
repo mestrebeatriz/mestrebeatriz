@@ -518,21 +518,30 @@ body:not(.is-article-visible) #intro {
   max-width: 100% !important;
 }
 
-/* MODAL: ONLY active article visible */
-body.is-article-visible #main article:not(.active) {
-  display: none !important;
-}
 
-body.is-article-visible #main article.active {
-  display: block !important;
-  opacity: 1 !important;
-  max-width: 800px !important;
+/* ========== MODAL SYSTEM - DELETE EVERYTHING ABOVE AND USE ONLY THIS ========== */
+
+/* Landing: ONLY About visible */
+body:not(.is-article-visible) article:not(#intro) { display: none !important; }
+body:not(.is-article-visible) #intro { display: block !important; }
+
+/* Modal: ONLY active article visible */
+body.is-article-visible article:not(.active) { display: none !important; }
+body.is-article-visible article.active { 
+  display: block !important; 
+  max-width: 900px !important; 
   margin: 0 auto !important;
 }
 
-/* Modal overlay effect */
+/* Modal overlay blur */
 body.is-article-visible #header,
-body.is-article-visible #footer {
-  opacity: 0.6 !important;
-  filter: blur(3px) !important;
+body.is-article-visible #footer { 
+  opacity: 0.5 !important; 
+  filter: blur(5px) !important; 
 }
+
+/* Image fix */
+.image.main img { max-width: 300px !important; width: 100% !important; height: auto !important; }
+
+/* Button hover fix */
+#header nav ul li a { cursor: pointer !important; }
