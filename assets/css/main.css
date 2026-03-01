@@ -145,6 +145,21 @@ body.is-article-visible #main {
   z-index: 1000 !important;
 }
 
+body.is-article-visible #main {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: 90vw !important;
+  max-width: 850px !important;
+  height: 85vh !important;
+  padding: 0 !important;
+  z-index: 1000 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
 body.is-article-visible #main article {
   display: block !important;
   width: 100% !important;
@@ -158,7 +173,9 @@ body.is-article-visible #main article {
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 50px 120px rgba(0,0,0,0.9);
+  animation: modalSlideIn 0.4s ease !important;
 }
+
 
 /* CONTACT FORM */
 #contact form { max-width: 500px; margin: 2rem auto 0; }
@@ -286,4 +303,15 @@ input.primary:hover {
   #wrapper { padding: 1rem; }
   body.is-article-visible #main article { padding: 2rem 1.5rem !important; }
   .field.half { width: 100%; float: none; margin: 0 0 2rem 0; }
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
