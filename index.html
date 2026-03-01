@@ -55,6 +55,20 @@ a:hover { color: #ffffff; }
   background: rgba(30,35,50,0.98) !important; /* EXTRA SOLID */
   border: 1px solid #9fa8ff !important; /* GLOWING BORDER */
 }
+/* FIX: About behind modals */
+#about { 
+  position: relative; 
+  z-index: 1; 
+}
+
+.modal-container { 
+  z-index: 9999 !important; 
+}
+
+.modal-open #about { 
+  z-index: 0 !important; 
+  display: none !important; 
+}
 
 .image.main img { max-width: 300px; width: 100%; height: auto; object-fit: cover; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
 .button { display: inline-block; padding: 0.85rem 2rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 25px; color: #ffffff; font-weight: 500; transition: all 0.3s ease; cursor: pointer; }
@@ -125,11 +139,11 @@ a:hover { color: #ffffff; }
         <p>This essay compares the Book of Nicodemus and The Divine Comedy to offer a more holistic view of how Christians have imagined hell over time.<br><b>Published in Estrema.</b><br><a href="https://doi.org/10.51427/com.est.2024.03.01.0009">Read it here!</a></p>
 
         <h3>My linguistic review work</h3>
-        <p>I recently reviewed several texts for the second issue of Estrema, focusing on clarity, flow, and style.<br><a href="https://doi.org/10.51427/com.est.2024.03.02">Read the full issue here!</a></p>
+ <p>I recently reviewed several texts for the second issue of Estrema, focusing on clarity, flow, and style.<br><a href="https://doi.org/10.51427/com.est.2024.03.02">Read the full issue here!</a></p>
 
-        <h3>Other things I am working on</h3>
-        <p>I have recently worked on a paper on Dreyfus and AI:<br><a href="images/DREYFUS_AI.pdf">Read it here!</a></p>
-      </article>
+ <h3>Other things I am working on</h3>
+  <p>I have recently worked on a paper on Dreyfus and AI:<br><a href="images/DREYFUS_AI.pdf">Read it here!</a></p>
+  </article>
 
       <article id="recommendations">
         <h2 class="major">Recommendations</h2>
