@@ -8,37 +8,38 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/main.css" />
   
-  <script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
 $(document).ready(function() {
+  // 1. Remove preload
   $('body').removeClass('is-preload');
   
-  $(document).on('click', '#header nav a[href^="#"], .button[href^="#"]', function(e) {
+  // 2. Navigation buttons - OPEN modals
+  $('#header nav a[href^="#"]:not([href="#intro"]), .button[href^="#"]:not([href="#intro"]').on('click', function(e) {
     e.preventDefault();
-    var $target = $($(this).attr('href'));
-    if ($target.length) {
-      $('article').removeClass('active');
-      $target.addClass('active');
-      $('body').addClass('is-article-visible');
-    }
+    var targetId = $(this).attr('href');
+    $('article').removeClass('active');
+    $(targetId).addClass('active');
+    $('body').addClass('is-article-visible');
   });
   
-  // CLICK OUTSIDE TO CLOSE (NEW!)
-  $(document).on('click', '#main', function(e) {
-    if (e.target === this) {
-      $('body').removeClass('is-article-visible');
-      $('#intro').addClass('active');
-    }
+  // 3. About button - just show About, no modal
+  $('#header nav a[href="#intro"]').on('click', function(e) {
+    e.preventDefault();
+    $('body').removeClass('is-article-visible');
+    $('#intro').addClass('active');
   });
   
-  // ESC KEY TO CLOSE (NEW!)
+  // 4. ESC key closes modals
   $(document).keyup(function(e) {
-    if (e.keyCode === 27) {
+    if (e.keyCode === 27) { // ESC
       $('body').removeClass('is-article-visible');
       $('#intro').addClass('active');
     }
   });
 });
 </script>
+
 
 
 </head>
