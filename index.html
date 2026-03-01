@@ -9,30 +9,35 @@
   <link rel="stylesheet" href="assets/css/main.css" />
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script>
-    $(window).on('load', function() {
-      $('body').removeClass('is-preload');
-    });
+<script>
+$(document).ready(function() {
+  // Remove preload immediately
+  $('body').removeClass('is-preload');
+  
+  // FIXED Modal navigation - targets ONLY # links
+  $(document).on('click', '#header nav a[href^="#"], .button[href^="#"]', function(e) {
+    e.preventDefault();
+    var $target = $($(this).attr('href'));
     
-    $(document).ready(function() {
-      $('#header nav a[href^="#"], .button[href^="#"]').click(function(event) {
-        event.preventDefault();
-        var target = $(this).attr('href');
-        
-        if (target === '#intro') {
-          $('body').removeClass('is-article-visible');
-        } else {
-          $('body').addClass('is-article-visible');
-          $('article').removeClass('active');
-          $(target).addClass('active');
-        }
-      });
-      
-      $('.close').click(function() {
-        $('body').removeClass('is-article-visible');
-      });
-    });
-  </script>
+    if ($target.length) {
+      // Close all articles
+      $('article').removeClass('active');
+      // Activate target
+      $target.addClass('active');
+      // Show overlay
+      $('body').addClass('is-article-visible');
+    }
+  });
+  
+  // Close button
+  $(document).on('click', '.close', function(e) {
+    e.preventDefault();
+    $('body').removeClass('is-article-visible');
+    $('#intro').addClass('active');
+  });
+});
+</script>
+
 </head>
 
 <body class="is-preload">
