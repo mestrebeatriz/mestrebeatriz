@@ -113,7 +113,9 @@ a:hover { color: #ffffff; }
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.85rem
+  padding: 0.85rem;
+}
+
 
 /* NUCLEAR MODAL FIX - HIGHEST SPECIFICITY */
 body.is-article-visible {
