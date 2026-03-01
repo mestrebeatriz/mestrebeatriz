@@ -507,3 +507,32 @@ body:not(.is-article-visible) #main article.active {
   background: rgba(255,255,255,0.2) !important;
 }
 
+/* LANDING PAGE: ONLY About visible */
+body:not(.is-article-visible) #main article:not(#intro) {
+  display: none !important;
+}
+
+body:not(.is-article-visible) #intro {
+  display: block !important;
+  opacity: 1 !important;
+  max-width: 100% !important;
+}
+
+/* MODAL: ONLY active article visible */
+body.is-article-visible #main article:not(.active) {
+  display: none !important;
+}
+
+body.is-article-visible #main article.active {
+  display: block !important;
+  opacity: 1 !important;
+  max-width: 800px !important;
+  margin: 0 auto !important;
+}
+
+/* Modal overlay effect */
+body.is-article-visible #header,
+body.is-article-visible #footer {
+  opacity: 0.6 !important;
+  filter: blur(3px) !important;
+}
