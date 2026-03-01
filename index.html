@@ -269,57 +269,47 @@ body.modal-open .modal-container {
     </footer>
   </div>
 
-  <script>
-  $(function() {
-    $('body').removeClass('is-preload');
+ <script>
+$(function() {
+  $('body').removeClass('is-preload');
 
-    // Open modal
-    $('#header nav a[href="#research"]').on('click', function(e) {
-      e.preventDefault();
-      $('.modal-container').hide();
-      $('#research').show();
+  // Generic handler: use the href to target the right modal
+  $('#header nav a[href^="#"]').on('click', function(e) {
+    e.preventDefault();
+    
+    const targetId = $(this).attr('href');  // e.g. "#research"
+    
+    // Hide all modals
+    $('.modal-container').hide();
+    
+    // Show the matching one (or return to about)
+    if (targetId === '#about') {
+      $('body').removeClass('modal-open');
+    } else {
+      $(targetId).show();  // ← This dynamically finds #research, etc.
       $('body').addClass('modal-open');
-    });
+    }
+  });
 
-    $('#header nav a[href="#recommendations"]').on('click', function(e) {
-      e.preventDefault();
-      $('.modal-container').hide();
-      $('#recommendations').show();
-      $('body').addClass('modal-open');
-    });
-
-    $('#header nav a[href="#contact"]').on('click', function(e) {
-      e.preventDefault();
-      $('.modal-container').hide();
-      $('#contact').show();
-      $('body').addClass('modal-open');
-    });
-
-    // About: just close modals
-    $('#header nav a[href="#about"]').on('click', function(e) {
-      e.preventDefault();
+  // Close on ESC
+  $(document).on('keyup', function(e) {
+    if (e.key === 'Escape') {
       $('.modal-container').hide();
       $('body').removeClass('modal-open');
-    });
+    }
+  });
 
-    // Close on ESC
-    $(document).on('keyup', function(e) {
-      if (e.key === 'Escape') {
+  // Close when clicking outside modal content
+  $(document).on('click', function(e) {
+    if ($('body').hasClass('modal-open')) {
+      if (!$(e.target).closest('.modal-content, #header nav').length) {
         $('.modal-container').hide();
         $('body').removeClass('modal-open');
       }
-    });
-
-    // Close when clicking outside modal content
-    $(document).on('click', function(e) {
-      if ($('body').hasClass('modal-open')) {
-        if (!$(e.target).closest('.modal-content, #header nav').length) {
-          $('.modal-container').hide();
-          $('body').removeClass('modal-open');
-        }
-      }
-    });
+    }
   });
-  </script>
+});
+</script>
+
 </body>
 </html>
