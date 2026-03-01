@@ -8,38 +8,38 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/main.css" />
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script>
+  <script>
 $(document).ready(function() {
-  // Remove preload immediately
   $('body').removeClass('is-preload');
   
-  // FIXED Modal navigation - targets ONLY # links
   $(document).on('click', '#header nav a[href^="#"], .button[href^="#"]', function(e) {
     e.preventDefault();
     var $target = $($(this).attr('href'));
-    
     if ($target.length) {
-      // Close all articles
       $('article').removeClass('active');
-      // Activate target
       $target.addClass('active');
-      // Show overlay
       $('body').addClass('is-article-visible');
     }
   });
   
-  // Close button
-  $(document).on('click', '.close', function(e) {
-    e.preventDefault();
-    $('body').removeClass('is-article-visible');
-    $('#intro').addClass('active');
+  // CLICK OUTSIDE TO CLOSE (NEW!)
+  $(document).on('click', '#main', function(e) {
+    if (e.target === this) {
+      $('body').removeClass('is-article-visible');
+      $('#intro').addClass('active');
+    }
+  });
+  
+  // ESC KEY TO CLOSE (NEW!)
+  $(document).keyup(function(e) {
+    if (e.keyCode === 27) {
+      $('body').removeClass('is-article-visible');
+      $('#intro').addClass('active');
+    }
   });
 });
-  $(document).on('click', '#main', function(e) {
-  if (e.target === this) $('body').removeClass('is-article-visible');
-});
 </script>
+
 
 </head>
 
