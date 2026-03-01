@@ -105,61 +105,68 @@
 $(document).ready(function() {
   $('body').removeClass('is-preload');
   
-  // Hide all articles initially except intro
-  $('#main article:not(#intro)').hide();
+  // Hide ALL modals initially, show only About
+  $('#work, #recommendations, #contact').hide();
   $('#intro').show();
   
-  // Open Research modal
-  $('#header nav a[href="#work"], .button[href="#work"]').on('click', function(e) {
-    e.preventDefault();
+  function openModal(targetId) {
+    // Hide EVERYTHING first
     $('#main article').hide();
-    $('#work').show().css({'display': 'block !important'});
+    // Force show ONLY target
+    $(targetId).show();
+    // Activate modal mode
     $('body').addClass('is-article-visible');
-  });
+  }
   
-  // Open Recommendations modal  
-  $('#header nav a[href="#recommendations"]').on('click', function(e) {
-    e.preventDefault();
-    $('#main article').hide();
-    $('#recommendations').show().css({'display': 'block !important'});
-    $('body').addClass('is-article-visible');
-  });
-  
-  // Open Contact modal
-  $('#header nav a[href="#contact"]').on('click', function(e) {
-    e.preventDefault();
-    $('#main article').hide();
-    $('#contact').show().css({'display': 'block !important'});
-    $('body').addClass('is-article-visible');
-  });
-  
-  // Close to landing (About)
-  $('#header nav a[href="#intro"]').on('click', function(e) {
-    e.preventDefault();
+  function showAbout() {
     $('body').removeClass('is-article-visible');
     $('#main article').hide();
     $('#intro').show();
+  }
+  
+  // Research
+  $('#header nav a[href="#work"]').click(function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    openModal('#work');
   });
   
-  // ESC closes
+  // Recommendations  
+  $('#header nav a[href="#recommendations"]').click(function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    openModal('#recommendations');
+  });
+  
+  // Contact
+  $('#header nav a[href="#contact"]').click(function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    openModal('#contact');
+  });
+  
+  // About / Close
+  $('#header nav a[href="#intro"]').click(function(e) {
+    e.preventDefault();
+    showAbout();
+  });
+  
+  // ESC
   $(document).keyup(function(e) {
-    if (e.which === 27) {
-      $('body').removeClass('is-article-visible');
-      $('#main article').hide();
-      $('#intro').show();
-    }
+    if (e.which === 27) showAbout();
   });
   
-  // Outside click closes
-  $(document).on('click', function(e) {
-    if ($('body').hasClass('is-article-visible') && !$(e.target).closest('#main article').length) {
-      $('body').removeClass('is-article-visible');
-      $('#main article').hide();
-      $('#intro').show();
+  // Outside click
+  $(document).click(function(e) {
+    if ($('body').hasClass('is-article-visible') && 
+        !$(e.target).closest('#main article').length &&
+        !$(e.target).closest('#header nav').length) {
+      showAbout();
     }
   });
 });
 </script>
+
 
 
 </body>
