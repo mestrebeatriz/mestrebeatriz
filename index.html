@@ -11,34 +11,42 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
 $(document).ready(function() {
-  // 1. Remove preload
-  $('body').removeClass('is-preload');
+  $('body').removeClass('is-preload *').hide().fadeIn(500);
   
-  // 2. Navigation buttons - OPEN modals
-  $('#header nav a[href^="#"]:not([href="#intro"]), .button[href^="#"]:not([href="#intro"]').on('click', function(e) {
+  // Landing: ONLY show About
+  $('#intro').addClass('active');
+  $('article:not(#intro)').hide();
+  
+  // Click nav buttons (EXCEPT About/CV)
+  $('#header nav a[href="#work"], #header nav a[href="#recommendations"], #header nav a[href="#contact"], .button').click(function(e) {
     e.preventDefault();
-    var targetId = $(this).attr('href');
-    $('article').removeClass('active');
-    $(targetId).addClass('active');
+    var target = $(this).attr('href');
+    
+    // Hide everything, show ONLY target modal
+    $('article').removeClass('active').hide();
+    $(target).addClass('active').fadeIn(300);
     $('body').addClass('is-article-visible');
   });
   
-  // 3. About button - just show About, no modal
-  $('#header nav a[href="#intro"]').on('click', function(e) {
+  // About button = back to landing
+  $('#header nav a[href="#intro"]').click(function(e) {
     e.preventDefault();
     $('body').removeClass('is-article-visible');
-    $('#intro').addClass('active');
+    $('article').hide();
+    $('#intro').addClass('active').fadeIn(300);
   });
   
-  // 4. ESC key closes modals
+  // ESC closes to landing
   $(document).keyup(function(e) {
-    if (e.keyCode === 27) { // ESC
+    if (e.keyCode === 27) {
       $('body').removeClass('is-article-visible');
-      $('#intro').addClass('active');
+      $('article').hide();
+      $('#intro').addClass('active').fadeIn(300);
     }
   });
 });
 </script>
+
 
 
 
