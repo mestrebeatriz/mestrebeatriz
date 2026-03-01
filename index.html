@@ -7,79 +7,181 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
   <style>
-/* CRITICAL: NAV ALWAYS CLICKABLE */
-#header nav a { pointer-events: auto !important; }
+  /* --- BASE --- */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    height: 100%;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    color: #ffffff;
+    background: linear-gradient(135deg, #1a1f2e 0%, #16213e 50%, #0f0f23 100%);
+    overflow-x: hidden;
+  }
+  h1, h2, h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+  }
+  h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+  h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+  p { margin-bottom: 1.5rem; line-height: 1.65; }
+  a { color: #9fa8ff; text-decoration: none; transition: all 0.3s ease; }
+  a:hover { color: #ffffff; }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; font-family: 'Inter', sans-serif; font-weight: 300; color: #ffffff; background: linear-gradient(135deg, #1a1f2e 0%, #16213e 50%, #0f0f23 100%); overflow-x: hidden; }
-h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; line-height: 1.3; margin-bottom: 1rem; }
-h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
-h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
-p { margin-bottom: 1.5rem; line-height: 1.65; }
-a { color: #9fa8ff; text-decoration: none; transition: all 0.3s ease; }
-a:hover { color: #ffffff; }
+  #wrapper {
+    min-height: 100vh;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
-#wrapper { min-height: 100vh; max-width: 1400px; margin: 0 auto; padding: 2rem; display: flex; flex-direction: column; justify-content: space-between; }
-#header { text-align: center; flex-shrink: 0; }
-#header .content { margin-bottom: 2rem; }
-#header h1 { margin-bottom: 0.75rem; }
-#header .content p { font-size: 0.95rem; opacity: 0.85; letter-spacing: 0.05em; text-transform: uppercase; }
-.tags { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0; }
-.tag { padding: 0.3rem 1rem; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; }
-#header nav ul { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; list-style: none; padding: 2rem 0; }
-#header nav a { 
-  display: inline-flex; align-items: center; padding: 0.85rem 1.5rem; 
-  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); 
-  border-radius: 25px; font-weight: 500; backdrop-filter: blur(10px); 
-  transition: all 0.3s ease; cursor: pointer; /* FORCE CLICKABLE */
-}
-#header nav a:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.4); transform: translateY(-2px); }
+  /* --- HEADER --- */
+  #header { text-align: center; flex-shrink: 0; }
+  #header .content { margin-bottom: 2rem; }
+  #header h1 { margin-bottom: 0.75rem; }
+  #header .content p {
+    font-size: 0.95rem;
+    opacity: 0.85;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
 
-/* MODAL SYSTEM */
-.modal-open { background: rgba(15,20,35,0.98); overflow: hidden; }
-.modal-open #header, .modal-open #footer { opacity: 0.15; filter: blur(8px); }
-.modal-open #header nav a { opacity: 1 !important; filter: none !important; pointer-events: auto !important; } /* KEEP NAV CLICKABLE */
-.modal-container { 
-  position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-  width: 90vw; max-width: 850px; height: 85vh; z-index: 9999; display: none;
-}
-.modal-content { 
-  display: none; width: 100%; height: 100%; padding: 3rem; 
-  background: rgba(30,35,50,0.95); /* SOLID DARK */ 
-  border-radius: 24px; border: 1px solid rgba(255,255,255,0.1); 
-  box-shadow: 0 50px 120px rgba(0,0,0,0.9); overflow-y: auto; 
-}
-.modal-container.active .modal-content { 
-  display: block; 
-  background: rgba(30,35,50,0.98) !important; /* EXTRA SOLID */
-  border: 1px solid #9fa8ff !important; /* GLOWING BORDER */
-}
-/* FIX: About behind modals */
-#about { 
-  position: relative; 
-  z-index: 1; 
-}
+  .tags {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1.5rem 0;
+  }
+  .tag {
+    padding: 0.3rem 1rem;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
 
-.modal-container { 
-  z-index: 9999 !important; 
-}
+  #header nav ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    list-style: none;
+    padding: 2rem 0;
+  }
+  #header nav a {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.85rem 1.5rem;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 25px;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  #header nav a:hover {
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.4);
+    transform: translateY(-2px);
+  }
 
-.modal-open #about { 
-  z-index: 0 !important; 
-  display: none !important; 
-}
+  /* --- ABOUT (LANDING) --- */
+  #about {
+    position: relative;
+    z-index: 1;
+  }
+  .image.main img {
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  }
 
-.image.main img { max-width: 300px; width: 100%; height: auto; object-fit: cover; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
-.button { display: inline-block; padding: 0.85rem 2rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 25px; color: #ffffff; font-weight: 500; transition: all 0.3s ease; cursor: pointer; }
-.button:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
-#footer { text-align: center; opacity: 0.6; font-size: 0.9rem; }
-.rec { margin: 2rem 0; padding: 1.5rem; background: rgba(255,255,255,0.05); border-radius: 16px; border-left: 4px solid #9fa8ff; }
+  .button {
+    display: inline-block;
+    padding: 0.85rem 2rem;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 25px;
+    color: #ffffff;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  .button:hover {
+    background: rgba(255,255,255,0.2);
+    transform: translateY(-2px);
+  }
 
-@media (max-width: 768px) { #wrapper { padding: 1rem; } .modal-content { padding: 2rem 1.5rem; } }
-</style>
+  /* --- MODALS --- */
+  .modal-open {
+    background: rgba(15,20,35,0.98);
+    overflow: hidden;
+  }
+  .modal-open #header,
+  .modal-open #footer {
+    opacity: 0.15;
+    filter: blur(8px);
+  }
+  .modal-open #about {
+    display: none;
+  }
 
+  .modal-container {
+    display: none;         /* default hidden */
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vw;
+    max-width: 850px;
+    height: 85vh;
+    z-index: 9999;
+  }
+  .modal-content {
+    width: 100%;
+    height: 100%;
+    padding: 3rem;
+    background: rgba(30,35,50,0.98);
+    border-radius: 24px;
+    border: 1px solid #9fa8ff;
+    box-shadow: 0 50px 120px rgba(0,0,0,0.9);
+    overflow-y: auto;
+  }
+
+  .rec {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: rgba(255,255,255,0.05);
+    border-radius: 16px;
+    border-left: 4px solid #9fa8ff;
+  }
+
+  #footer {
+    text-align: center;
+    opacity: 0.6;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 768px) {
+    #wrapper { padding: 1rem; }
+    .modal-content { padding: 2rem 1.5rem; }
+  }
+  </style>
 </head>
+
 <body class="is-preload">
   <div id="wrapper">
     <header id="header">
@@ -104,147 +206,143 @@ a:hover { color: #ffffff; }
     </header>
 
     <div id="main">
-      <!-- LANDING -->
+      <!-- ABOUT / LANDING -->
       <article id="about">
         <h2>About</h2>
-        <p>Hi! I'm Beatriz :)<br>I’m a philosophy grad student based in Lisbon, working at the intersection of philosophy of mathematics, cognition, and AI. My research focuses mainly on the limits of computation (human or artificial) and on how formal theories of logic and mathematics relate to real cognition.</p>
-
-        <p>Since publishing my first paper at 21 (literature is my second passion!) and later joining the same journal as a reviewer, I became especially invested in the art of clear argumentation, careful writing, and collaborative academic work. These experiences deeply influenced my current projects and my big‑time goal of contributing to a more methodologically self‑aware cognitive science.</p>
-
-        <p>On the Research page you'll find current projects and developing ideas that bridge technical work and conceptual analysis. I also included a Reading Recommendations page, where I collect papers and books that have been important for my thinking and that I often suggest to friends, students, and colleagues. If any of this overlaps with your interests—or if you'd like to discuss collaborations, RA work, or supervision—feel free to get in touch with me via the Contact page.</p>
+        <p>Hi! I'm Beatriz :)<br>I’m a philosophy grad student based in Lisbon, working at the intersection of philosophy of mathematics, cognition, and AI.</p>
+        <p>Since publishing my first paper at 21 (literature is my second passion!) and later joining the same journal as a reviewer, I became especially invested in the art of clear argumentation, careful writing, and collaborative academic work.</p>
+        <p>On the Research page you'll find current projects and developing ideas that bridge technical work and conceptual analysis...</p>
         <span class="image main"><img src="images/IMG_1.jpeg" alt="Beatriz" /></span>
         <p>This is me when I got into uni! (About 5 years ago hehe)</p>
- 
       </article>
 
-      <!-- MODALS -->
-      <!-- MODAL: Research -->
-      <article id="research">
-     <div id="research" class="modal-container">
-       <article class="modal-content">
-      <h2>Research</h2>
-        <p>I mainly focus on Philosophy of Mathematics and Cognitive Science.</p>
-        <div class="tags">
-          <span class="tag">Computation</span>
-          <span class="tag">Scientific Realism</span>
-          <span class="tag">Phenomenology</span>
-          <span class="tag">Strong AI</span>
-        </div>
-        <ul class="alt">
-          <li>Mathematical Cognition and innateness debates</li>
-          <li>Philosophy of Science in AI development</li>
-        </ul>
-        <p>My research explores the limits of computation in human and artificial minds, drawing on philosophy of mathematics, logic, and cognitive science. I'm especially interested in how formal systems model (and sometimes fail to model) abstraction, representation, and reasoning, and in what these limitations imply for ambitious claims about AI and cognitive architectures.</p>
+      <!-- MODAL: RESEARCH -->
+      <div id="research" class="modal-container">
+        <article class="modal-content">
+          <h2>Research</h2>
+          <p>I mainly focus on Philosophy of Mathematics and Cognitive Science.</p>
+          <div class="tags">
+            <span class="tag">Computation</span>
+            <span class="tag">Scientific Realism</span>
+            <span class="tag">Phenomenology</span>
+            <span class="tag">Strong AI</span>
+          </div>
+          <ul>
+            <li>Mathematical Cognition and innateness debates</li>
+            <li>Philosophy of Science in AI development</li>
+          </ul>
+          <p>My research explores the limits of computation in human and artificial minds...</p>
 
-        <h3>Non-philosophical work</h3>
-        <h4>Mutações Infernais: Uma análise comparativa das representações do Inferno n'A Divina Comédia e nos Evangelhos Apócrifos</h4>
-        <p>This essay compares the Book of Nicodemus and The Divine Comedy to offer a more holistic view of how Christians have imagined hell over time.<br><b>Published in Estrema.</b><br><a href="https://doi.org/10.51427/com.est.2024.03.01.0009">Read it here!</a></p>
+          <h3>Non-philosophical work</h3>
+          <h4>Mutações Infernais: ...</h4>
+          <p><a href="https://doi.org/10.51427/com.est.2024.03.01.0009">Read it here!</a></p>
 
-        <h3>My linguistic review work</h3>
- <p>I recently reviewed several texts for the second issue of Estrema, focusing on clarity, flow, and style.<br><a href="https://doi.org/10.51427/com.est.2024.03.02">Read the full issue here!</a></p>
+          <h3>Other things I am working on</h3>
+          <p><a href="images/DREYFUS_AI.pdf">Dreyfus and AI — Read it here!</a></p>
+        </article>
+      </div>
 
- <h3>Other things I am working on</h3>
-  <p>I have recently worked on a paper on Dreyfus and AI:<br><a href="images/DREYFUS_AI.pdf">Read it here!</a></p>
- 
-       </article><div id="recommendations" class="modal-container">
-  <article class="modal-content">
-    <h2>Recommendations</h2>
-    <p>Some books I've been reading or recommending for people who want to think about logic, math, and minds.</p>
+      <!-- MODAL: RECOMMENDATIONS -->
+      <div id="recommendations" class="modal-container">
+        <article class="modal-content">
+          <h2>Recommendations</h2>
+          <p>Some books I've been reading or recommending for people who want to think about logic, math, and minds.</p>
 
+          <div class="rec">
+            <h3>Absolute Provability and Safe Knowledge of Axioms — Timothy Williamson</h3>
+            <p>Honestly? A great paper...</p>
+          </div>
 
-        <div class="rec">
-          <h3>Absolute Provability and Safe Knowledge of Axioms — Timothy Williamson</h3>
-          <p>Honestly? A great paper. A gateway drug to deeper Theoretical Mathematics debates. I'll forever be thankful to my advisor for introducing me to this specific paper.</p>
-        </div>
+          <div class="rec">
+            <h3>An Introduction to Gödel's Theorems — Peter Smith</h3>
+            <p>The clearest guide I know to Gödel's incompleteness theorems.</p>
+          </div>
 
-        <div class="rec">
-          <h3>An Introduction to Gödel's Theorems — Peter Smith</h3>
-          <p>The clearest guide I know to Gödel's incompleteness theorems. It makes the technical machinery genuinely accessible while keeping the mathematical seriousness intact. Good as a starting point to delve into deeper readings.</p>
-        </div>
+          <div class="rec">
+            <h3>Psychosemantics — Jerry Fodor</h3>
+            <p>An excellent launchpad to computation theories of mind.</p>
+          </div>
 
-        <div class="rec">
-          <h3>Psychosemantics: The Problem of Meaning in the Philosophy of Mind - Jerry Fodor</h3>
-          <p>An excellent launchpad to the incredible world of CCTM and other Computation Theories. The human mind is fascinating, and I think this book illustrates an extremely interesting concept: meaning.</p>
-        </div>
+          <div class="rec">
+            <h3>Brain Bisection and The Unity of Consciousness — Thomas Nagel</h3>
+            <p>Split-brain cases and what they tell us about the mind.</p>
+          </div>
+        </article>
+      </div>
 
-        <div class="rec">
-          <h3>Brain Bisection and The Unity of Consciousness - Thomas Nagel</h3>
-          <p>I would like to preface by admitting that I am extremely biased towards Split Brain cases. I find them absolutely fascinating, and believe they give us great insight into the deeper functioning of the human brain.</p>
-        </div>
-      </article>
-
-
+      <!-- MODAL: CONTACT -->
       <div id="contact" class="modal-container">
         <article class="modal-content">
           <h2>Contact</h2>
           <p>Based in Lisbon, Portugal.</p>
-          <div style="text-align: center; margin: 3rem 0; padding: 2rem; background: rgba(255,255,255,0.05); border-radius: 24px; border: 1px solid rgba(255,255,255,0.1);">
-            <p style="font-size: 1.1rem; margin-bottom: 1.5rem; opacity: 0.9;">
-              <i class="fas fa-envelope" style="color: #9fa8ff; margin-right: 0.5rem;"></i>
+          <div style="text-align:center; margin:3rem 0; padding:2rem; background:rgba(255,255,255,0.05); border-radius:24px; border:1px solid rgba(255,255,255,0.1);">
+            <p style="font-size:1.1rem; margin-bottom:1.5rem; opacity:0.9;">
               beatrizmestre@edu.ulisboa.pt
             </p>
-            <a href="mailto:beatrizmestre@edu.ulisboa.pt?subject=Hi%20Beatriz%20-%20From%20your%20website" class="button" style="padding: 1rem 2.5rem; font-size: 1.1rem;">Send me an email :)</a>
+            <a href="mailto:beatrizmestre@edu.ulisboa.pt?subject=Hi%20Beatriz%20-%20From%20your%20website" class="button" style="padding:1rem 2.5rem; font-size:1.1rem;">
+              Send me an email :)
+            </a>
           </div>
         </article>
       </div>
     </div>
 
-    <footer id="footer">&copy; Beatriz Mestre. Lisbon, 2026.</footer>
+    <footer id="footer">
+      &copy; Beatriz Mestre. Lisbon, 2026.
+    </footer>
   </div>
 
-<script>
-$(document).ready(function() {
-  $('body').removeClass('is-preload');
-  $('.modal-container').hide();
-  
-  // Research (now #work)
-  $('#header nav a[href="#work"]').click(function(e) {
-    e.preventDefault();
-    $('.modal-container').hide().removeClass('active');
-    $('#work').show().addClass('active');
-    $('body').addClass('modal-open');
-  });
-  
-  // Recommendations
-  $('#header nav a[href="#recommendations"]').click(function(e) {
-    e.preventDefault();
-    $('.modal-container').hide().removeClass('active');
-    $('#recommendations').show().addClass('active');
-    $('body').addClass('modal-open');
-  });
-  
-  // Contact
-  $('#header nav a[href="#contact"]').click(function(e) {
-    e.preventDefault();
-    $('.modal-container').hide().removeClass('active');
-    $('#contact').show().addClass('active');
-    $('body').addClass('modal-open');
-  });
-  
-  // ESC
-  $(document).keyup(function(e) {
-    if (e.which === 27) {
-      $('.modal-container').hide().removeClass('active');
+  <script>
+  $(function() {
+    $('body').removeClass('is-preload');
+
+    // Open modal
+    $('#header nav a[href="#research"]').on('click', function(e) {
+      e.preventDefault();
+      $('.modal-container').hide();
+      $('#research').show();
+      $('body').addClass('modal-open');
+    });
+
+    $('#header nav a[href="#recommendations"]').on('click', function(e) {
+      e.preventDefault();
+      $('.modal-container').hide();
+      $('#recommendations').show();
+      $('body').addClass('modal-open');
+    });
+
+    $('#header nav a[href="#contact"]').on('click', function(e) {
+      e.preventDefault();
+      $('.modal-container').hide();
+      $('#contact').show();
+      $('body').addClass('modal-open');
+    });
+
+    // About: just close modals
+    $('#header nav a[href="#about"]').on('click', function(e) {
+      e.preventDefault();
+      $('.modal-container').hide();
       $('body').removeClass('modal-open');
-    }
-  });
-  
-  // FIXED: Click outside to close
-  $(document).on('click', function(e) {
-    if ($('body').hasClass('modal-open')) {
-      if (!$(e.target).closest('.modal-container').length) {
-        $('.modal-container').hide().removeClass('active');
+    });
+
+    // Close on ESC
+    $(document).on('keyup', function(e) {
+      if (e.key === 'Escape') {
+        $('.modal-container').hide();
         $('body').removeClass('modal-open');
       }
-    }
+    });
+
+    // Close when clicking outside modal content
+    $(document).on('click', function(e) {
+      if ($('body').hasClass('modal-open')) {
+        if (!$(e.target).closest('.modal-content, #header nav').length) {
+          $('.modal-container').hide();
+          $('body').removeClass('modal-open');
+        }
+      }
+    });
   });
-});
-</script>
-
-
-
-
-
-
+  </script>
 </body>
 </html>
