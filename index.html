@@ -112,27 +112,28 @@
       </article>
 
       <!-- Contact -->
-      <article id="contact">
-        <h2 class="major">Contact</h2>
-        <p>Based in Lisbon, Portugal. Reach out via email.</p>
-        <form method="post" action="#">
-          <div class="field half first">
-            <label for="name">Name</label>
-            <input type="text" name="name" id="name" />
-          </div>
-          <div class="field half">
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" />
-          </div>
-          <div class="field">
-            <label for="message">Message</label>
-            <textarea name="message" id="message" rows="4"></textarea>
-          </div>
-          <ul class="actions">
-            <input type="submit" value="Send Message" class="primary" />
-          </ul>
-        </form>
-      </article>
+     <!-- Contact -->
+<article id="contact">
+  <h2 class="major">Contact</h2>
+  <p>Based in Lisbon, Portugal. Reach out via email.</p>
+  <form method="post" action="#">
+    <div class="field half first">
+      <input type="text" name="name" id="name" required />
+      <label for="name">Name</label>
+    </div>
+    <div class="field half">
+      <input type="email" name="email" id="email" required />
+      <label for="email">Email</label>
+    </div>
+    <div class="field">
+      <textarea name="message" id="message" rows="5" required></textarea>
+      <label for="message">Message</label>
+    </div>
+    <ul class="actions">
+      <li><input type="submit" value="Send Message" class="primary" /></li>
+    </ul>
+  </form>
+</article>>
     </div>
 
     <footer id="footer">
