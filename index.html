@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <!-- Your existing head content -->
   <link rel="icon" type="image/png" href="images/favicon.png">
   <title>Beatriz Mestre</title>
   <meta charset="utf-8" />
@@ -9,18 +8,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/main.css" />
   
-  <!-- Modal JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script>
-    $(document).ready(function() {
-      // Remove preload
+    $(window).on('load', function() {
       $('body').removeClass('is-preload');
-      
-      // Modal navigation
-      $('#header nav a, .button').on('click', function(event) {
+    });
+    
+    $(document).ready(function() {
+      $('#header nav a[href^="#"], .button[href^="#"]').click(function(event) {
         event.preventDefault();
         var target = $(this).attr('href');
-        if (target == '#intro') {
+        
+        if (target === '#intro') {
           $('body').removeClass('is-article-visible');
         } else {
           $('body').addClass('is-article-visible');
@@ -29,8 +28,7 @@
         }
       });
       
-      // Close modal
-      $('.close').on('click', function() {
+      $('.close').click(function() {
         $('body').removeClass('is-article-visible');
       });
     });
@@ -39,7 +37,6 @@
 
 <body class="is-preload">
   <div id="wrapper">
-    <!-- Header (KEEP YOUR ORIGINAL) -->
     <header id="header">
       <div class="content">
         <div class="inner">
@@ -56,32 +53,33 @@
         <ul>
           <li><a href="#intro">About</a></li>
           <li><a href="#work">Research</a></li>
-          <li><a href="images/beatriz_mestre_cv_26.pdf">CV</a></li>
+          <li><a href="images/beatriz_mestre_cv_26.pdf" target="_blank">CV</a></li>
           <li><a href="#recommendations">Recommendations</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
     </header>
 
-    <!-- Main with MODAL SECTIONS -->
     <div id="main">
-      <!-- About (shows by default, no modal) -->
+      <!-- About -->
       <article id="intro" class="active">
         <span class="close">×</span>
         <h2 class="major">About</h2>
-        <p>Hi! I’m Beatriz :)
-I’m a philosophy grad student based in Lisbon, working at the intersection of philosophy of mathematics, cognition, and AI. My research focuses mainly on the limits of computation (human or artificial) and on how formal theories of logic and mathematics relate to real cognition.</p>
+        <p>Hi! I'm Beatriz :)<br>I’m a philosophy grad student based in Lisbon, working at the intersection of philosophy of mathematics, cognition, and AI. My research focuses mainly on the limits of computation (human or artificial) and on how formal theories of logic and mathematics relate to real cognition.</p>
 
-<p>Since publishing my first paper at 21 (literature is my second passion!) and later joining the same journal as a reviewer, I became especially invested in the art of clear argumentation, careful writing, and collaborative academic work. These experiences deeply influenced my current projects and my big‑time goal of contributing to a more methodologically self‑aware cognitive science.</p>
+        <p>Since publishing my first paper at 21 (literature is my second passion!) and later joining the same journal as a reviewer, I became especially invested in the art of clear argumentation, careful writing, and collaborative academic work. These experiences deeply influenced my current projects and my big‑time goal of contributing to a more methodologically self‑aware cognitive science.</p>
 
-<p>On the Research page you’ll find current projects and developing ideas that bridge technical work and conceptual analysis. I also included a Reading Recommendations page, where I collect papers and books that have been important for my thinking and that I often suggest to friends, students, and colleagues. If any of this overlaps with your interests—or if you’d like to discuss collaborations, RA work, or supervision—feel free to get in touch with me via the Contact page.</p>
-								<span class="image main"><img src="images/IMG_1.jpeg"alt="" /></span>
-							<p> This is me when I got into uni! (About 5 years ago hehe) </p>
+        <p>On the Research page you'll find current projects and developing ideas that bridge technical work and conceptual analysis. I also included a Reading Recommendations page, where I collect papers and books that have been important for my thinking and that I often suggest to friends, students, and colleagues. If any of this overlaps with your interests—or if you'd like to discuss collaborations, RA work, or supervision—feel free to get in touch with me via the Contact page.</p>
+        
+        <span class="image main"><img src="images/IMG_1.jpeg" alt="Beatriz at university" style="max-width: 300px; width: 100%; height: auto;" /></span>
+        <p>This is me when I got into uni! (About 5 years ago hehe)</p>
+        
+        <ul class="actions">
           <li><a href="#work" class="button">View My Research</a></li>
         </ul>
       </article>
 
-      <!-- Research MODAL -->
+      <!-- Research (YOUR TEXT EXACTLY) -->
       <article id="work">
         <span class="close">×</span>
         <h2 class="major">Research</h2>
@@ -96,77 +94,51 @@ I’m a philosophy grad student based in Lisbon, working at the intersection of 
           <li>Mathematical Cognition and innateness debates</li>
           <li>Philosophy of Science in AI development</li>
         </ul>
-        <p>
-    My research explores the limits of computation in human and artificial minds, drawing on philosophy of mathematics, logic, and cognitive science. I’m especially interested in how formal systems model (and sometimes fail to model) abstraction, representation, and reasoning, and in what these limitations imply for ambitious claims about AI and cognitive architectures. Current projects grow out of this general picture and focus on computational and cognitive constraints in mathematical thinking, the role of abstraction in concept formation, and critical assessments of how contemporary AI systems are theorized within philosophy and cognitive science.
-  </p>
+        <p>My research explores the limits of computation in human and artificial minds, drawing on philosophy of mathematics, logic, and cognitive science. I'm especially interested in how formal systems model (and sometimes fail to model) abstraction, representation, and reasoning, and in what these limitations imply for ambitious claims about AI and cognitive architectures. Current projects grow out of this general picture and focus on computational and cognitive constraints in mathematical thinking, the role of abstraction in concept formation, and critical assessments of how contemporary AI systems are theorized within philosophy and cognitive science.</p>
 
-  <h3>Non-philosophical work</h3>
-  <p>
-    Alongside my core research, I also enjoy working on literary and historical themes when they intersect with questions about imagination, belief, and representation.
-  </p>
+        <h3>Non-philosophical work</h3>
+        <p>Alongside my core research, I also enjoy working on literary and historical themes when they intersect with questions about imagination, belief, and representation.</p>
 
-  <h4>Mutações Infernais: Uma análise comparativa das representações do Inferno n'A Divina Comédia e nos Evangelhos Apócrifos</h4>
+        <h4>Mutações Infernais: Uma análise comparativa das representações do Inferno n'A Divina Comédia e nos Evangelhos Apócrifos</h4>
+        <p>This essay compares the Book of Nicodemus and The Divine Comedy to offer a more holistic view of how Christians have imagined hell over time.<br><b>This work has been published in Estrema.</b><br><a href="https://doi.org/10.51427/com.est.2024.03.01.0009">Read it here!</a></p>
 
-  <p>
-    This essay compares the Book of Nicodemus and The Divine Comedy to offer a more holistic view of how Christians have imagined hell over time.
-    <b>This work has been published in Estrema.</b>
-    <a href="https://doi.org/10.51427/com.est.2024.03.01.0009">Read it here!</a>
-  </p>
+        <h3>My linguistic review work</h3>
+        <p>I'm also involved in the more "invisible" side of academic work, helping shape texts so that arguments and ideas can come through as clearly as possible.</p>
+        <p>I recently reviewed several texts for the second issue of Estrema, focusing on clarity, flow, and style.<br><a href="https://doi.org/10.51427/com.est.2024.03.02">Read the full issue here!</a></p>
 
-  <h3>My linguistic review work</h3>
-  <p>
-    I’m also involved in the more “invisible” side of academic work, helping shape texts so that arguments and ideas can come through as clearly as possible.
-  </p>
-
-  <p>
-    I recently reviewed several texts for the second issue of Estrema, focusing on clarity, flow, and style.
-    <a href="https://doi.org/10.51427/com.est.2024.03.02">Read the full issue here!</a>
-  </p>
-
-  <h3>Other things I am working on</h3>
-  <p>
-    Some projects are still in motion, but they give a good sense of where my current interests are heading.
-  </p>
-
-  <p>
-    I have recently worked on a paper on Dreyfus and AI, thinking about what classic phenomenological critiques can still teach us about current discussions in artificial intelligence:
-    <a href="images/DREYFUS_AI.pdf">Read it here!</a>
+        <h3>Other things I am working on</h3>
+        <p>Some projects are still in motion, but they give a good sense of where my current interests are heading.</p>
+        <p>I have recently worked on a paper on Dreyfus and AI, thinking about what classic phenomenological critiques can still teach us about current discussions in artificial intelligence:<br><a href="images/DREYFUS_AI.pdf">Read it here!</a></p>
       </article>
 
-      <!-- Recommendations MODAL -->
+      <!-- Recommendations (YOUR TEXT EXACTLY) -->
       <article id="recommendations">
         <span class="close">×</span>
-      
-								<h2 class="major">Recommendations</h2>
-<p>Some books I’ve been reading or recommending for people who want to think about logic, math, and minds.</p>
+        <h2 class="major">Recommendations</h2>
+        <p>Some books I've been reading or recommending for people who want to think about logic, math, and minds.</p>
 
-<div class="rec">
-  <h3>Absolute Provability and Safe Knowledge of Axioms — Timothy Williamson</h3>
-  <p>Honestly? A great paper. A gateway drug to deeper Theoretical Mathematics debates. I'll forever be thankful to my advisor for introducing me to this specific paper.</p>
-</div>
+        <div class="rec">
+          <h3>Absolute Provability and Safe Knowledge of Axioms — Timothy Williamson</h3>
+          <p>Honestly? A great paper. A gateway drug to deeper Theoretical Mathematics debates. I'll forever be thankful to my advisor for introducing me to this specific paper.</p>
+        </div>
 
-<div class="rec">
-  <h3>An Introduction to Gödel’s Theorems — Peter Smith</h3>
-  <p>The clearest guide I know to Gödel’s incompleteness theorems. It makes the technical machinery genuinely accessible while keeping the mathematical seriousness intact. Good as a starting point to delve into deeper readings.</p>
-</div>
+        <div class="rec">
+          <h3>An Introduction to Gödel's Theorems — Peter Smith</h3>
+          <p>The clearest guide I know to Gödel's incompleteness theorems. It makes the technical machinery genuinely accessible while keeping the mathematical seriousness intact. Good as a starting point to delve into deeper readings.</p>
+        </div>
 
-<div class="rec">
-  <h3>Psychosemantics: The Problem of Meaning in the Philosophy of Mind - Jerry Fodor</h3>
-  <p>An excellent launchpad to the incredible world of CCTM and other Computation Theories. The human mind is fascinating, and I think this book illustrates an extremely interesting concept: meaning.</p>
-</div>
+        <div class="rec">
+          <h3>Psychosemantics: The Problem of Meaning in the Philosophy of Mind - Jerry Fodor</h3>
+          <p>An excellent launchpad to the incredible world of CCTM and other Computation Theories. The human mind is fascinating, and I think this book illustrates an extremely interesting concept: meaning.</p>
+        </div>
 
-<div class="rec">
-  <h3>Brain Bisection and The Unity of Consciousness - Thomas Nagel</h3>
-  <p>I would like to preface by admitting that I am extremely biased towards Split Brain cases. I find them absolutely fascinating, and believe they give us great insight into the deeper functioning of the human brain.</p>
-</div>
+        <div class="rec">
+          <h3>Brain Bisection and The Unity of Consciousness - Thomas Nagel</h3>
+          <p>I would like to preface by admitting that I am extremely biased towards Split Brain cases. I find them absolutely fascinating, and believe they give us great insight into the deeper functioning of the human brain.</p>
+        </div>
+      </article>
 
-
-						
-			
-				</article>	
-  
-
-      <!-- Contact MODAL -->
+      <!-- Contact -->
       <article id="contact">
         <span class="close">×</span>
         <h2 class="major">Contact</h2>
@@ -191,7 +163,6 @@ I’m a philosophy grad student based in Lisbon, working at the intersection of 
       </article>
     </div>
 
-    <!-- Footer -->
     <footer id="footer">
       <div class="copyright">&copy; Beatriz Mestre. Lisbon, 2026.</div>
     </footer>
