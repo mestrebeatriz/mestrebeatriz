@@ -39,4 +39,109 @@
       <!-- LANDING: About -->
       <article id="intro">
         <h2 class="major">About</h2>
-        <p>Hi! I'm Beatriz :)<br>I’m a philosophy grad student
+        <p>Hi! I'm Beatriz :)<br>I’m a philosophy grad student based in Lisbon, working at the intersection of philosophy of mathematics, cognition, and AI. My research focuses mainly on the limits of computation (human or artificial) and on how formal theories of logic and mathematics relate to real cognition.</p>
+        <p>Since publishing my first paper at 21 (literature is my second passion!) and later joining the same journal as a reviewer, I became especially invested in the art of clear argumentation, careful writing, and collaborative academic work.</p>
+        <span class="image main"><img src="images/IMG_1.jpeg" alt="Beatriz at university" /></span>
+        <p>This is me when I got into uni! (About 5 years ago hehe)</p>
+        <ul class="actions">
+          <li><a href="#work" class="button">View My Research</a></li>
+        </ul>
+      </article>
+
+      <!-- MODAL: Research -->
+      <article id="work" style="display: none;">
+        <h2 class="major">Research</h2>
+        <p>Specializing in epistemology, philosophy of mind, and cognitive foundations of mathematics.</p>
+        <div class="tags">
+          <span class="tag">Computation</span><span class="tag">Scientific Realism</span><span class="tag">Phenomenology</span><span class="tag">Strong AI</span>
+        </div>
+        <p>My research explores the limits of computation in human and artificial minds, drawing on philosophy of mathematics, logic, and cognitive science.</p>
+        <h3>Published Work</h3>
+        <p><b>Mutações Infernais</b> - Published in <i>Estrema</i><br><a href="https://doi.org/10.51427/com.est.2024.03.01.0009">Read it here!</a></p>
+        <h3>Other Projects</h3>
+        <p>Dreyfus and AI paper:<br><a href="images/DREYFUS_AI.pdf">Read it here!</a></p>
+      </article>
+
+      <!-- MODAL: Recommendations -->
+      <article id="recommendations" style="display: none;">
+        <h2 class="major">Recommendations</h2>
+        <div class="rec">
+          <h3>Absolute Provability - Timothy Williamson</h3>
+          <p>A gateway drug to deeper Theoretical Mathematics debates.</p>
+        </div>
+        <div class="rec">
+          <h3>Gödel's Theorems - Peter Smith</h3>
+          <p>The clearest guide to Gödel's incompleteness theorems.</p>
+        </div>
+        <div class="rec">
+          <h3>Psychosemantics - Jerry Fodor</h3>
+          <p>Launchpad to Computation Theories of Mind.</p>
+        </div>
+      </article>
+
+      <!-- MODAL: Contact -->
+      <article id="contact" style="display: none;">
+        <h2 class="major">Contact</h2>
+        <p>Based in Lisbon, Portugal.</p>
+        <div style="text-align: center; margin: 3rem 0; padding: 2rem; background: rgba(255,255,255,0.05); border-radius: 24px; border: 1px solid rgba(255,255,255,0.1);">
+          <p style="font-size: 1.1rem; margin-bottom: 1.5rem; opacity: 0.9;">
+            <i class="fas fa-envelope" style="color: #9fa8ff; margin-right: 0.5rem;"></i>
+            beatriz.mestre@email.com
+          </p>
+          <a href="mailto:beatriz.mestre@email.com?subject=Hi%20Beatriz%20-%20From%20your%20website" 
+             class="button" style="display: inline-block; padding: 1rem 2.5rem; font-size: 1.1rem;">
+            Send me an email
+          </a>
+        </div>
+      </article>
+    </div>
+
+    <footer id="footer">
+      <div class="copyright">&copy; Beatriz Mestre. Lisbon, 2026.</div>
+    </footer>
+  </div>
+
+  <script>
+$(document).ready(function() {
+  $('body').removeClass('is-preload');
+  
+  function showLanding() {
+    $('body').removeClass('is-article-visible');
+    $('#main article').hide();
+    $('#intro').show();
+  }
+  
+  // Start on landing
+  showLanding();
+  
+  // Open ONE modal at a time
+  $('#header nav a[href!="#intro"]').not('[href="images/beatriz_mestre_cv_26.pdf"]').click(function(e) {
+    e.preventDefault();
+    var target = $(this).attr('href');
+    $('#main article').hide();  // Hide ALL
+    $(target).show();           // Show ONE
+    $('body').addClass('is-article-visible');
+  });
+  
+  // About = landing
+  $('#header nav a[href="#intro"]').click(function(e) {
+    e.preventDefault();
+    showLanding();
+  });
+  
+  // ESC = landing
+  $(document).keyup(function(e) {
+    if (e.keyCode === 27) showLanding();
+  });
+  
+  // Click outside = landing
+  $(document).on('click', function(e) {
+    if ($('body').hasClass('is-article-visible') && 
+        !$(e.target).closest('#main article').length) {
+      showLanding();
+    }
+  });
+});
+  </script>
+</body>
+</html>
