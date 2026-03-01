@@ -11,41 +11,40 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
 $(document).ready(function() {
-  $('body').removeClass('is-preload *').hide().fadeIn(500);
+  // Remove preload
+  $('body').removeClass('is-preload');
   
-  // Landing: ONLY show About
-  $('#intro').addClass('active');
-  $('article:not(#intro)').hide();
+  // Show only About on landing
+  function showLanding() {
+    $('body').removeClass('is-article-visible');
+    $('article').removeClass('active').hide();
+    $('#intro').addClass('active').show();
+  }
   
-  // Click nav buttons (EXCEPT About/CV)
-  $('#header nav a[href="#work"], #header nav a[href="#recommendations"], #header nav a[href="#contact"], .button').click(function(e) {
+  // Initially show landing
+  showLanding();
+  
+  // Nav clicks - open modals
+  $('#header nav a[href="#work"], #header nav a[href="#recommendations"], #header nav a[href="#contact"]').click(function(e) {
     e.preventDefault();
     var target = $(this).attr('href');
-    
-    // Hide everything, show ONLY target modal
     $('article').removeClass('active').hide();
-    $(target).addClass('active').fadeIn(300);
+    $(target).addClass('active').show();
     $('body').addClass('is-article-visible');
   });
   
-  // About button = back to landing
+  // About button or ESC = back to landing
   $('#header nav a[href="#intro"]').click(function(e) {
     e.preventDefault();
-    $('body').removeClass('is-article-visible');
-    $('article').hide();
-    $('#intro').addClass('active').fadeIn(300);
+    showLanding();
   });
   
-  // ESC closes to landing
   $(document).keyup(function(e) {
-    if (e.keyCode === 27) {
-      $('body').removeClass('is-article-visible');
-      $('article').hide();
-      $('#intro').addClass('active').fadeIn(300);
-    }
+    if (e.keyCode === 27) showLanding();
   });
 });
 </script>
+
 
 
 
