@@ -59,6 +59,7 @@ a:hover { color: #ffffff; }
       </div>
       <nav>
         <ul>
+          <li><a href="#about">About</a></li>
           <li><a href="#research">Research</a></li>
           <li><a href="images/beatriz_mestre_cv_26.pdf" target="_blank">CV</a></li>
           <li><a href="#recommendations">Recommendations</a></li>
@@ -118,53 +119,50 @@ a:hover { color: #ffffff; }
     <footer id="footer">&copy; Beatriz Mestre. Lisbon, 2026.</footer>
   </div>
 
-  <script>
+ <script>
 $(document).ready(function() {
   $('body').removeClass('is-preload');
   
-  // Clear all handlers first
-  $(document).off('click');
-  
-  // Navigation clicks
-  $('a[href*="#"]').click(function(e) {
+  // Navigation clicks - BULLETPROOF VERSION
+  $('#header nav a[href*="#"]').click(function(e) {
     e.preventDefault();
-    e.stopImmediatePropagation();
     
-    var target = $(this).attr('href');
+    var targetId = $(this).attr('href').substring(1); // #research → research
     
-    // Close all modals first
-    $('.modal-container article').removeClass('active');
+    // Close all modals
+    $('.modal-content').removeClass('active');
     $('body').removeClass('modal-open');
     
-    if (target === '#about') {
-      // Landing page
+    if (targetId === 'about') {
       $('#about').show();
     } else {
-      // Open ONE modal
-      $('#' + target.substring(1) + ' .modal-content').addClass('active');
+      // Open correct modal
+      $('#' + targetId + ' .modal-content').addClass('active');
       $('body').addClass('modal-open');
     }
   });
   
-  // ESC closes modal
+  // ESC
   $(document).keyup(function(e) {
     if (e.which === 27) {
-      $('.modal-container article').removeClass('active');
+      $('.modal-content').removeClass('active');
       $('body').removeClass('modal-open');
       $('#about').show();
     }
   });
   
-  // Click outside closes modal
+  // Outside click
   $(document).click(function(e) {
-    if ($('body').hasClass('modal-open') && !$(e.target).closest('.modal-container, #header nav').length) {
-      $('.modal-container article').removeClass('active');
+    if ($('body').hasClass('modal-open') && 
+        !$(e.target).closest('.modal-container, #header nav').length) {
+      $('.modal-content').removeClass('active');
       $('body').removeClass('modal-open');
       $('#about').show();
     }
   });
 });
 </script>
+
 
 </body>
 </html>
