@@ -428,3 +428,82 @@ body.is-article-visible #footer {
   color: #ffffff !important;
 }
 
+ /* CRITICAL: DIMENSION MODAL SYSTEM RESTORED */
+body.is-article-visible {
+  padding: 4rem 2rem !important;
+}
+
+body.is-article-visible #header,
+body.is-article-visible #footer {
+  opacity: 0.5 !important;
+  transform: scale(0.95) !important;
+  filter: blur(4px) !important;
+  pointer-events: none !important;
+}
+
+#main article {
+  opacity: 0 !important;
+  transform: translateY(25px) !important;
+  transition: all 0.5s !important;
+  position: relative !important;
+  max-width: 50vw !important;
+  margin: 0 auto !important;
+}
+
+#main article.active {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+body:not(.is-article-visible) #main article.active {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Hide non-active articles */
+#main article:not(.active) {
+  display: none !important;
+}
+
+/* Fix image size */
+.image.main img {
+  max-width: 280px !important;
+  width: 100% !important;
+  height: auto !important;
+  border-radius: 16px !important;
+}
+
+/* Ensure buttons work */
+#header nav ul {
+  display: flex !important;
+  gap: 1rem !important;
+}
+
+#header nav ul li a {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}
+
+/* Close button fix */
+.close {
+  position: absolute !important;
+  top: 20px !important;
+  right: 20px !important;
+  font-size: 24px !important;
+  color: rgba(255,255,255,0.7) !important;
+  cursor: pointer !important;
+  z-index: 100 !important;
+  width: 40px !important;
+  height: 40px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 50% !important;
+  transition: all 0.3s ease !important;
+}
+
+.close:hover {
+  color: #fff !important;
+  background: rgba(255,255,255,0.2) !important;
+}
+
