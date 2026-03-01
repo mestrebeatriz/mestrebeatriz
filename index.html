@@ -336,47 +336,45 @@
   <!-- MODAL OVERLAY -->
   <div class="modal-overlay" id="overlay"></div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const sections = document.querySelectorAll('.content');
-      const navLinks = document.querySelectorAll('.nav-link[data-section]');
-      const overlay = document.getElementById('overlay');
-      
-      // Show about by default
-      showSection('about');
-      
-      navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
-          const section = this.getAttribute('data-section');
-          showSection(section);
-        });
-      });
-      
-      function showSection(id) {
-        sections.forEach(section => {
-          if (section.id === id) {
-            section.classList.remove('hidden');
-            overlay.classList.remove('active');
-          } else {
-            section.classList.add('hidden');
-          }
-        });
-        
-        // Close overlay if showing about
-        if (id === 'about') {
-          overlay.classList.remove('active');
-        } else {
-          overlay.classList.add('active');
-        }
-      }
-      
-      // Close on overlay click or ESC
-      overlay.addEventListener('click', () => showSection('about'));
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') showSection('about');
-      });
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const sections = document.querySelectorAll('.content');
+  const navLinks = document.querySelectorAll('.nav-link[data-section]');
+  const overlay = document.getElementById('overlay');
+  
+  // ENSURE overlay starts HIDDEN
+  overlay.classList.remove('active');
+  
+  // Show about by default (no overlay)
+  showSection('about');
+  
+  navLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const section = this.getAttribute('data-section');
+      showSection(section);
     });
-  </script>
+  });
+  
+  function showSection(id) {
+    sections.forEach(section => {
+      section.classList.toggle('hidden', section.id !== id);
+    });
+    
+    if (id === 'about') {
+      overlay.classList.remove('active');
+    } else {
+      overlay.classList.add('active');
+    }
+  }
+  
+  // Close on overlay click or ESC
+  overlay.addEventListener('click', () => showSection('about'));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') showSection('about');
+  });
+});
+</script>
+
 </body>
 </html>
