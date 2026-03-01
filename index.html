@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Beatriz Mestre</title>
-  <link rel="icon" type="image/png" href="images/favicon.png">
+  <!-- Removed broken favicon -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
@@ -42,67 +42,44 @@
       justify-content: space-between;
     }
     
-    /* HEADER */
-    .header {
-      text-align: center;
-      flex-shrink: 0;
-    }
-    
+    .header { text-align: center; flex-shrink: 0; }
     .header-content { margin-bottom: 2rem; }
     .header-content p {
-      font-size: 0.95rem;
-      opacity: 0.85;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+      font-size: 0.95rem; opacity: 0.85;
+      letter-spacing: 0.05em; text-transform: uppercase;
     }
     
     .tags {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 0.5rem;
+      display: flex; justify-content: center;
+      flex-wrap: wrap; gap: 0.5rem;
       margin: 1.5rem 0;
     }
-    
     .tag {
       padding: 0.4rem 1.2rem;
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.2);
       border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+      font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.05em; text-transform: uppercase;
       backdrop-filter: blur(10px);
     }
     
-    .nav {
-      padding: 2rem 0;
-    }
-    
+    .nav { padding: 2rem 0; }
     .nav-list {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      list-style: none;
-      padding: 0;
+      display: flex; justify-content: center;
+      flex-wrap: wrap; gap: 1rem;
+      list-style: none; padding: 0;
     }
-    
     .nav-link {
-      display: inline-flex;
-      align-items: center;
+      display: inline-flex; align-items: center;
       padding: 1rem 1.8rem;
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 25px;
-      font-weight: 500;
-      text-decoration: none;
-      color: inherit;
+      border-radius: 25px; font-weight: 500;
+      text-decoration: none; color: inherit;
       backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
+      transition: all 0.3s ease; cursor: pointer;
     }
-    
     .nav-link:hover {
       background: rgba(255,255,255,0.15);
       border-color: rgba(255,255,255,0.4);
@@ -110,122 +87,66 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
     
-    /* MAIN CONTENT */
     .main {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      flex: 1; display: flex;
+      align-items: center; justify-content: center;
       position: relative;
     }
     
     .content {
-      max-width: 800px;
-      width: 100%;
-      opacity: 1;
-      transform: translateY(0);
+      max-width: 800px; width: 100%;
+      opacity: 1; transform: translateY(0);
       transition: all 0.4s ease;
     }
-    
     .content.hidden {
-      opacity: 0;
-      transform: translateY(20px);
-      pointer-events: none;
+      display: none !important; /* FIXED #1 */
     }
     
     .profile-img {
-      max-width: 300px;
-      width: 100%;
-      height: auto;
-      object-fit: cover;
+      max-width: 300px; width: 100%;
+      height: auto; object-fit: cover;
       border-radius: 20px;
       box-shadow: 0 25px 50px rgba(0,0,0,0.4);
-      margin: 2rem auto;
-      display: block;
+      margin: 2rem auto; display: block;
     }
     
     .rec {
-      margin: 2rem 0;
-      padding: 2rem;
+      margin: 2rem 0; padding: 2rem;
       background: rgba(255,255,255,0.05);
-      border-radius: 20px;
-      border-left: 4px solid #9fa8ff;
+      border-radius: 20px; border-left: 4px solid #9fa8ff;
       backdrop-filter: blur(10px);
     }
     
     .email-cta {
-      text-align: center;
-      margin: 3rem 0;
-      padding: 2.5rem;
-      background: rgba(255,255,255,0.05);
-      border-radius: 24px;
-      border: 1px solid rgba(255,255,255,0.1);
+      text-align: center; margin: 3rem 0;
+      padding: 2.5rem; background: rgba(255,255,255,0.05);
+      border-radius: 24px; border: 1px solid rgba(255,255,255,0.1);
       backdrop-filter: blur(10px);
     }
-    
     .email-link {
-      display: inline-block;
-      padding: 1.2rem 2.5rem;
-      background: rgba(159,168,255,0.2);
-      border: 1px solid #9fa8ff;
-      border-radius: 25px;
-      color: #ffffff;
-      font-weight: 500;
-      font-size: 1.1rem;
-      text-decoration: none;
+      display: inline-block; padding: 1.2rem 2.5rem;
+      background: rgba(159,168,255,0.2); border: 1px solid #9fa8ff;
+      border-radius: 25px; color: #ffffff; font-weight: 500;
+      font-size: 1.1rem; text-decoration: none;
       transition: all 0.3s ease;
     }
-    
     .email-link:hover {
-      background: #9fa8ff;
-      color: #1a1f2e;
+      background: #9fa8ff; color: #1a1f2e;
       transform: translateY(-2px);
       box-shadow: 0 15px 40px rgba(159,168,255,0.3);
     }
     
-    /* FOOTER */
     .footer {
-      text-align: center;
-      opacity: 0.6;
-      font-size: 0.9rem;
-      padding: 2rem 0;
+      text-align: center; opacity: 0.6;
+      font-size: 0.9rem; padding: 2rem 0;
     }
     
-    /* MODAL OVERLAY */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(15,20,35,0.98);
-      z-index: 999;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.4s ease;
-      backdrop-filter: blur(5px);
-    }
-    
-    .modal-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-    
-    .modal-overlay .header,
-    .modal-overlay .footer {
-      opacity: 0.2;
-      filter: blur(4px);
-      pointer-events: none;
-    }
+    /* FIXED #2 - Modal overlay completely removed */
     
     @media (max-width: 768px) {
       .container { padding: 1rem; }
-      .content { padding: 0 1rem; }
       .nav-list { gap: 0.5rem; }
-      .nav-link { 
-        padding: 0.8rem 1.2rem; 
-        font-size: 0.9rem;
-      }
+      .nav-link { padding: 0.8rem 1.2rem; font-size: 0.9rem; }
     }
   </style>
 </head>
@@ -259,7 +180,10 @@
         <p>Hi! I'm Beatriz :)<br>I’m a philosophy grad student based in Lisbon, working at the intersection of philosophy of mathematics, cognition, and AI.</p>
         <p>Since publishing my first paper at 21 (literature is my second passion!) and later joining the same journal as a reviewer, I became especially invested in the art of clear argumentation, careful writing, and collaborative academic work.</p>
         <p>On the Research page you'll find current projects and developing ideas that bridge technical work and conceptual analysis...</p>
-        <img src="images/IMG_1.jpeg" alt="Beatriz" class="profile-img">
+        <!-- FIXED #3 - Placeholder image -->
+        <div style="width: 300px; height: 400px; margin: 2rem auto; background: rgba(255,255,255,0.05); border-radius: 20px; display: flex; align-items: center; justify-content: center; border: 2px dashed rgba(255,255,255,0.3);">
+          <span style="opacity: 0.7; font-size: 0.9rem; text-align: center;">👩‍🎓 Beatriz Mestre<br><small>Photo coming soon</small></span>
+        </div>
         <p>This is me when I got into uni! (About 5 years ago hehe)</p>
       </section>
 
@@ -278,11 +202,9 @@
           <li>Philosophy of Science in AI development</li>
         </ul>
         <p>My research explores the limits of computation in human and artificial minds...</p>
-
         <h3>Non-philosophical work</h3>
         <h4>Mutações Infernais: ...</h4>
         <p><a href="https://doi.org/10.51427/com.est.2024.03.01.0009">Read it here!</a></p>
-
         <h3>Other things I am working on</h3>
         <p><a href="images/DREYFUS_AI.pdf">Dreyfus and AI — Read it here!</a></p>
       </section>
@@ -291,22 +213,18 @@
       <section id="recommendations" class="content hidden">
         <h2>Recommendations</h2>
         <p>Some books I've been reading or recommending for people who want to think about logic, math, and minds.</p>
-
         <div class="rec">
           <h3>Absolute Provability and Safe Knowledge of Axioms — Timothy Williamson</h3>
           <p>Honestly? A great paper...</p>
         </div>
-
         <div class="rec">
           <h3>An Introduction to Gödel's Theorems — Peter Smith</h3>
           <p>The clearest guide I know to Gödel's incompleteness theorems.</p>
         </div>
-
         <div class="rec">
           <h3>Psychosemantics — Jerry Fodor</h3>
           <p>An excellent launchpad to computation theories of mind.</p>
         </div>
-
         <div class="rec">
           <h3>Brain Bisection and The Unity of Consciousness — Thomas Nagel</h3>
           <p>Split-brain cases and what they tell us about the mind.</p>
@@ -333,74 +251,42 @@
     </footer>
   </div>
 
-<!-- MODAL OVERLAY - STARTS HIDDEN -->
-<div class="modal-overlay" id="overlay" style="display: none;"></div>
-
-
-<script>
-(function() {
-  // Wait for everything to load
-  window.addEventListener('load', function() {
-    const sections = document.querySelectorAll('.content');
-    const navLinks = document.querySelectorAll('.nav-link[data-section]');
-    const overlay = document.getElementById('overlay');
-    
-    // FORCE overlay OFF at start
-    overlay.style.display = 'none';
-    overlay.classList.remove('active');
-    
-    // Show About immediately
-    document.getElementById('about').classList.remove('hidden');
-    
-    navLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const sectionId = this.getAttribute('data-section');
-        switchSection(sectionId);
-      });
-    });
-    
-    function switchSection(id) {
-      sections.forEach(section => {
-        if (section.id === id) {
-          section.classList.remove('hidden');
-        } else {
-          section.classList.add('hidden');
-        }
+  <!-- FIXED #2 - SIMPLIFIED script, NO overlay -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const sections = document.querySelectorAll('.content');
+      const navLinks = document.querySelectorAll('.nav-link[data-section]');
+      
+      // Show About by default
+      sections.forEach(s => s.id !== 'about' ? s.classList.add('hidden') : s.classList.remove('hidden'));
+      
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('data-section');
+          sections.forEach(section => {
+            if (section.id === targetId) {
+              section.classList.remove('hidden');
+            } else {
+              section.classList.add('hidden');
+            }
+          });
+        });
       });
       
-      if (id === 'about') {
-        overlay.style.display = 'none';
-      } else {
-        overlay.style.display = 'block';
-      }
-    }
-    
-    // Close handlers
-    overlay.addEventListener('click', () => switchSection('about'));
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') switchSection('about');
+      // ESC closes to About
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          sections.forEach(section => {
+            if (section.id === 'about') {
+              section.classList.remove('hidden');
+            } else {
+              section.classList.add('hidden');
+            }
+          });
+        }
+      });
     });
-  });
-})();
-  .modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(15,20,35,0.98);
-  z-index: 1000;
-  display: none;  /* ← FORCE HIDDEN */
-  backdrop-filter: blur(5px);
-}
-
-.modal-overlay.active {
-  display: block !important;
-}
-
-</script>
-
-
+  </script>
 </body>
 </html>
