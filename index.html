@@ -185,5 +185,51 @@ $(document).ready(function() {
   });
 });
   </script>
+  <script>
+$(document).ready(function() {
+  // Remove preload
+  $('body').removeClass('is-preload');
+  
+  // Landing = ONLY intro visible, NO modal class
+  function showLanding() {
+    $('body').removeClass('is-article-visible');
+    $('.active').removeClass('active');
+    $('#intro').addClass('active');
+  }
+  
+  // Initially show landing
+  showLanding();
+  
+  // Research/Recommendations/Contact → MODAL
+  $('#header nav a[href="#work"], #header nav a[href="#recommendations"], #header nav a[href="#contact"]').click(function(e) {
+    e.preventDefault();
+    var target = $(this).attr('href');
+    $('.active').removeClass('active');
+    $(target).addClass('active');
+    $('body').addClass('is-article-visible');
+  });
+  
+  // About → LANDING (no modal)
+  $('#header nav a[href="#intro"]').click(function(e) {
+    e.preventDefault();
+    showLanding();
+  });
+  
+  // ESC → LANDING
+  $(document).keyup(function(e) {
+    if (e.keyCode === 27) showLanding();
+  });
+  
+  // Click outside → LANDING
+  $(document).on('click', function(e) {
+    if ($('body').hasClass('is-article-visible') && 
+        !$(e.target).closest('#main article.active').length && 
+        !$(e.target).closest('#header nav').length) {
+      showLanding();
+    }
+  });
+});
+</script>
+
 </body>
 </html>
