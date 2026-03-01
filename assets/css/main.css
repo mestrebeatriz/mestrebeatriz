@@ -151,4 +151,12 @@ body.is-article-visible #main article {
   border-radius: 16px;
   box-shadow: 0 20px 40px rgba(0,0,0,0.3);
 }
+body.is-article-visible #main {
+  z-index: 9999 !important;
+}
+
+body.is-article-visible #main article {
+  position: relative;
+  z-index: 10000 !important;
+}
 
