@@ -302,3 +302,97 @@ input.primary:hover {
   border-radius: 16px;
   border-left: 4px solid #9fa8ff;
 }
+
+/* BEAUTIFUL CONTACT FORM */
+#contact form {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.field {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.field label {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.7);
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.field input:focus + label,
+.field input:valid + label,
+.field textarea:focus + label,
+.field textarea:valid + label {
+  top: -0.5rem;
+  left: 0.75rem;
+  font-size: 0.75rem;
+  color: #9fa8ff;
+  background: rgba(15,20,35,0.98);
+  padding: 0 0.5rem;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 1.5rem 1rem 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 1rem;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: #9fa8ff;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 4px rgba(159, 168, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.field.half {
+  float: left;
+  width: 48%;
+}
+
+.field.half.first {
+  margin-right: 4%;
+}
+
+.field.half + .field.half {
+  margin-left: 4%;
+  margin-right: 0;
+}
+
+ul.actions {
+  clear: both;
+  list-style: none;
+  padding: 0;
+  margin-top: 2rem;
+}
+
+input.primary {
+  width: 100%;
+  background: linear-gradient(135deg, #9fa8ff, #7a8fff);
+  border: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 1.2rem;
+  font-size: 1rem;
+}
+
+input.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(159, 168, 255, 0.4);
+}
