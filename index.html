@@ -383,6 +383,22 @@
     });
   });
 })();
+  .modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15,20,35,0.98);
+  z-index: 1000;
+  display: none;  /* ← FORCE HIDDEN */
+  backdrop-filter: blur(5px);
+}
+
+.modal-overlay.active {
+  display: block !important;
+}
+
 </script>
 
 
