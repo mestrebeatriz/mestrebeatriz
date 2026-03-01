@@ -105,67 +105,55 @@
 $(document).ready(function() {
   $('body').removeClass('is-preload');
   
-  // Hide ALL modals initially, show only About
+  // OFF event handlers first (clear conflicts)
+  $('#header nav a').off('click');
+  $(document).off('click keyup');
+  
+  // Hide all modals, show only About
   $('#work, #recommendations, #contact').hide();
   $('#intro').show();
   
-  function openModal(targetId) {
-    // Hide EVERYTHING first
-    $('#main article').hide();
-    // Force show ONLY target
-    $(targetId).show();
-    // Activate modal mode
-    $('body').addClass('is-article-visible');
-  }
-  
-  function showAbout() {
-    $('body').removeClass('is-article-visible');
-    $('#main article').hide();
-    $('#intro').show();
-  }
-  
-  // Research
-  $('#header nav a[href="#work"]').click(function(e) {
+  // SINGLE click handler for ALL navigation
+  $('#header nav a[href*="#"]').click(function(e) {
     e.preventDefault();
-    e.stopPropagation();
-    openModal('#work');
-  });
-  
-  // Recommendations  
-  $('#header nav a[href="#recommendations"]').click(function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    openModal('#recommendations');
-  });
-  
-  // Contact
-  $('#header nav a[href="#contact"]').click(function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    openModal('#contact');
-  });
-  
-  // About / Close
-  $('#header nav a[href="#intro"]').click(function(e) {
-    e.preventDefault();
-    showAbout();
+    e.stopImmediatePropagation(); // STOP ALL OTHER HANDLERS
+    
+    var target = $(this).attr('href');
+    
+    if (target === '#intro') {
+      // Show landing
+      $('body').removeClass('is-article-visible');
+      $('#main article').hide();
+      $('#intro').show();
+    } else {
+      // Show ONE modal only
+      $('#main article').hide();
+      $(target).show();
+      $('body').addClass('is-article-visible');
+    }
   });
   
   // ESC
   $(document).keyup(function(e) {
-    if (e.which === 27) showAbout();
+    if (e.which === 27 && $('body').hasClass('is-article-visible')) {
+      $('body').removeClass('is-article-visible');
+      $('#main article').hide();
+      $('#intro').show();
+    }
   });
   
-  // Outside click
+  // Outside click (but NOT nav)
   $(document).click(function(e) {
     if ($('body').hasClass('is-article-visible') && 
-        !$(e.target).closest('#main article').length &&
-        !$(e.target).closest('#header nav').length) {
-      showAbout();
+        !$(e.target).closest('#main article, #header nav').length) {
+      $('body').removeClass('is-article-visible');
+      $('#main article').hide();
+      $('#intro').show();
     }
   });
 });
 </script>
+
 
 
 
