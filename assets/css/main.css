@@ -143,3 +143,12 @@ body.is-article-visible #main article {
   #wrapper { padding: 1rem; }
   body.is-article-visible #main article { padding: 2rem 1.5rem !important; }
 }
+.image.main img {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;  /* THIS FIXES STRETCHING */
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
