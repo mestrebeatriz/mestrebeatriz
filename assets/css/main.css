@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
 
-/* Reset & Base */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -22,7 +21,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Typography */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 600;
@@ -38,7 +36,6 @@ h4 { font-size: 1.1rem; }
 
 p { margin-bottom: 1.5rem; }
 
-/* Links */
 a {
   color: #9fa8ff;
   text-decoration: none;
@@ -47,7 +44,6 @@ a {
 
 a:hover { color: #ffffff; }
 
-/* Wrapper */
 #wrapper {
   min-height: 100vh;
   max-width: 1400px;
@@ -58,20 +54,13 @@ a:hover { color: #ffffff; }
   justify-content: space-between;
 }
 
-/* Header */
 #header {
   text-align: center;
   flex-shrink: 0;
 }
 
-#header .content {
-  margin-bottom: 2rem;
-}
-
-#header .content h1 {
-  margin-bottom: 0.75rem;
-}
-
+#header .content { margin-bottom: 2rem; }
+#header .content h1 { margin-bottom: 0.75rem; }
 #header .content p {
   font-size: 0.95rem;
   opacity: 0.85;
@@ -79,7 +68,6 @@ a:hover { color: #ffffff; }
   text-transform: uppercase;
 }
 
-/* Tags */
 .tags {
   display: flex;
   justify-content: center;
@@ -99,7 +87,6 @@ a:hover { color: #ffffff; }
   text-transform: uppercase;
 }
 
-/* Navigation */
 #header nav ul {
   display: flex;
   justify-content: center;
@@ -112,7 +99,6 @@ a:hover { color: #ffffff; }
 #header nav ul li a {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
   padding: 0.85rem 1.5rem;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -128,28 +114,23 @@ a:hover { color: #ffffff; }
   transform: translateY(-2px);
 }
 
-/* Articles - hide all except intro by default */
-article {
-  display: none;
-}
+/* ALL ARTICLES HIDDEN BY DEFAULT */
+article { display: none; }
 
-article.active {
-  display: block;
-}
-
-/* MODAL SYSTEM - CLEAN & WORKING */
+/* MODAL MODE */
 body.is-article-visible {
-  background: rgba(15, 20, 35, 0.98) !important;
-  overflow: hidden !important;
+  background: rgba(15, 20, 35, 0.98);
+  overflow: hidden;
+  transition: background 0.4s ease;
 }
 
 body.is-article-visible #header,
 body.is-article-visible #footer {
-  opacity: 0.2 !important;
-  filter: blur(10px) !important;
-  transform: scale(0.95) !important;
-  pointer-events: none !important;
-  transition: all 0.4s ease !important;
+  opacity: 0.15;
+  filter: blur(8px);
+  transform: scale(0.98);
+  pointer-events: none;
+  transition: all 0.4s ease;
 }
 
 body.is-article-visible #main {
@@ -158,156 +139,29 @@ body.is-article-visible #main {
   left: 50% !important;
   transform: translate(-50%, -50%) !important;
   width: 90vw !important;
-  max-width: 800px !important;
+  max-width: 850px !important;
   height: 85vh !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
   padding: 0 !important;
-  z-index: 1000000 !important;
+  z-index: 1000 !important;
 }
 
-body.is-article-visible #main article.active {
+body.is-article-visible #main article {
+  display: block !important;
   width: 100% !important;
   height: 100% !important;
   max-height: 85vh !important;
   overflow-y: auto !important;
   margin: 0 !important;
   padding: 3rem !important;
-  background: rgba(255, 255, 255, 0.05) !important;
-  backdrop-filter: blur(20px) !important;
-  border-radius: 24px !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  box-shadow: 0 50px 120px rgba(0,0,0,0.9) !important;
-  animation: modalSlideIn 0.4s ease !important;
-}
-
-/* Smooth transitions */
-@keyframes modalSlideIn {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -60%) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  #wrapper {
-    padding: 1rem;
-  }
-  
-  body.is-article-visible #main article.active {
-    padding: 2rem 1.5rem !important;
-    max-height: 90vh !important;
-  }
-}
-
-/* Form styles */
-form {
-  max-width: 600px;
-}
-
-.field {
-  margin-bottom: 1.5rem;
-}
-
-.field label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-}
-
-.field input,
-.field textarea {
-  width: 100%;
-  padding: 0.75rem;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  color: #ffffff;
-  font-family: inherit;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-}
-
-.field input:focus,
-.field textarea:focus {
-  outline: none;
-  border-color: #9fa8ff;
-  box-shadow: 0 0 0 3px rgba(159, 168, 255, 0.1);
-}
-
-.field.half {
-  width: 48%;
-}
-
-.field.half.first {
-  margin-right: 4%;
-}
-
-ul.actions {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  gap: 1rem;
-}
-
-ul.actions li {
-  flex: 1;
-}
-
-.button {
-  display: inline-block;
-  padding: 0.85rem 2rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 25px;
-  color: #ffffff;
-  text-decoration: none;
-  text-align: center;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-.button:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.4);
-  transform: translateY(-2px);
-}
-
-input.primary {
-  background: linear-gradient(135deg, #9fa8ff, #7a8fff);
-  border: none;
-  font-weight: 600;
-}
-
-input.primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(159, 168, 255, 0.4);
-}
-
-.image.main img {
-  border-radius: 16px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-}
-
-.rec {
-  margin: 2rem 0;
-  padding: 1.5rem;
   background: rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
-  border-left: 4px solid #9fa8ff;
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 50px 120px rgba(0,0,0,0.9);
 }
 
-/* BEAUTIFUL CONTACT FORM */
-#contact form {
-  max-width: 500px;
-  margin: 0 auto;
-}
+/* CONTACT FORM */
+#contact form { max-width: 500px; margin: 2rem auto 0; }
 
 .field {
   position: relative;
@@ -316,25 +170,26 @@ input.primary:hover {
 
 .field label {
   position: absolute;
-  top: 1rem;
-  left: 1rem;
+  top: 1.2rem;
+  left: 1.2rem;
   font-size: 0.9rem;
   font-weight: 500;
   color: rgba(255,255,255,0.7);
   pointer-events: none;
   transition: all 0.3s ease;
+  z-index: 1;
 }
 
 .field input:focus + label,
-.field input:valid + label,
+.field input:not(:placeholder-shown) + label,
 .field textarea:focus + label,
-.field textarea:valid + label {
-  top: -0.5rem;
-  left: 0.75rem;
+.field textarea:not(:placeholder-shown) + label {
+  top: 0.3rem;
+  left: 0.8rem;
   font-size: 0.75rem;
   color: #9fa8ff;
   background: rgba(15,20,35,0.98);
-  padding: 0 0.5rem;
+  padding: 0 0.4rem;
 }
 
 .field input,
@@ -355,24 +210,13 @@ input.primary:hover {
 .field textarea:focus {
   outline: none;
   border-color: #9fa8ff;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.12);
   box-shadow: 0 0 0 4px rgba(159, 168, 255, 0.15);
-  transform: translateY(-2px);
 }
 
-.field.half {
-  float: left;
-  width: 48%;
-}
-
-.field.half.first {
-  margin-right: 4%;
-}
-
-.field.half + .field.half {
-  margin-left: 4%;
-  margin-right: 0;
-}
+.field.half { float: left; width: 48%; }
+.field.half.first { margin-right: 4%; }
+.field.half + .field.half { margin-left: 4%; margin-right: 0; }
 
 ul.actions {
   clear: both;
@@ -390,9 +234,56 @@ input.primary {
   letter-spacing: 0.05em;
   padding: 1.2rem;
   font-size: 1rem;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 input.primary:hover {
   transform: translateY(-3px);
   box-shadow: 0 15px 40px rgba(159, 168, 255, 0.4);
+}
+
+.image.main img {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.rec {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  border-left: 4px solid #9fa8ff;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.85rem 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 25px;
+  color: #ffffff;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+#footer {
+  text-align: center;
+  opacity: 0.6;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  #wrapper { padding: 1rem; }
+  body.is-article-visible #main article { padding: 2rem 1.5rem !important; }
+  .field.half { width: 100%; float: none; margin: 0 0 2rem 0; }
 }
