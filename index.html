@@ -36,6 +36,9 @@ $(document).ready(function() {
     $('#intro').addClass('active');
   });
 });
+  $(document).on('click', '#main', function(e) {
+  if (e.target === this) $('body').removeClass('is-article-visible');
+});
 </script>
 
 </head>
