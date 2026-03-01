@@ -1,168 +1,238 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <link rel="icon" type="image/png" href="images/favicon.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Beatriz Mestre</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
-/* --- BASE --- */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body {
-  height: 100%;
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  color: #ffffff;
-  background: linear-gradient(135deg, #1a1f2e 0%, #16213e 50%, #0f0f23 100%);
-  overflow-x: hidden;
-}
-
-h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; line-height: 1.3; margin-bottom: 1rem; }
-h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
-h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
-p { margin-bottom: 1.5rem; line-height: 1.65; }
-a { color: #9fa8ff; text-decoration: none; transition: all 0.3s ease; }
-a:hover { color: #ffffff; }
-
-#wrapper {
-  min-height: 100vh;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-/* --- HEADER --- */
-#header { text-align: center; flex-shrink: 0; }
-#header .content { margin-bottom: 2rem; }
-#header h1 { margin-bottom: 0.75rem; }
-#header .content p { font-size: 0.95rem; opacity: 0.85; letter-spacing: 0.05em; text-transform: uppercase; }
-
-.tags { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0; }
-.tag {
-  padding: 0.3rem 1rem;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 20px;
-  font-size: 0.75rem; font-weight: 500;
-  letter-spacing: 0.05em; text-transform: uppercase;
-}
-
-#header nav ul {
-  display: flex; justify-content: center;
-  flex-wrap: wrap; gap: 1rem;
-  list-style: none; padding: 2rem 0;
-}
-#header nav a {
-  display: inline-flex; align-items: center;
-  padding: 0.85rem 1.5rem;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 25px; font-weight: 500;
-  backdrop-filter: blur(10px); transition: all 0.3s ease;
-  cursor: pointer;
-}
-#header nav a:hover {
-  background: rgba(255,255,255,0.15);
-  border-color: rgba(255,255,255,0.4);
-  transform: translateY(-2px);
-}
-
-/* --- ABOUT (LANDING) --- */
-.image.main img {
-  max-width: 300px; width: 100%;
-  height: auto; object-fit: cover;
-  border-radius: 16px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-}
-
-/* --- MODAL SYSTEM - FIXED! --- */
-body.modal-open {
-  background: rgba(15,20,35,0.98) !important;
-  overflow: hidden !important;
-}
-
-body.modal-open #header,
-body.modal-open #footer {
-  opacity: 0.15 !important;
-  filter: blur(8px) !important;
-  pointer-events: none !important;
-  transition: all 0.4s ease !important;
-}
-
-body.modal-open #about {
-  display: none !important;
-}
-
-body.modal-open .modal-container {
-  display: flex !important;  /* ← THIS WAS MISSING */
-  position: fixed !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
-  width: 90vw !important;
-  max-width: 850px !important;
-  height: 85vh !important;
-  z-index: 9999 !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-.modal-content {
-  width: 100%;
-  height: 100%;
-  max-height: 85vh;
-  padding: 3rem;
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(20px);
-  border-radius: 24px;
-  border: 1px solid rgba(255,255,255,0.1);
-  box-shadow: 0 50px 120px rgba(0,0,0,0.9);
-  overflow-y: auto;
-}
-
-.button {
-  display: inline-block;
-  padding: 0.85rem 2rem;
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 25px;
-  color: #ffffff;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-.button:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
-
-.rec {
-  margin: 2rem 0;
-  padding: 1.5rem;
-  background: rgba(255,255,255,0.05);
-  border-radius: 16px;
-  border-left: 4px solid #9fa8ff;
-}
-
-#footer { text-align: center; opacity: 0.6; font-size: 0.9rem; }
-
-@media (max-width: 768px) {
-  #wrapper { padding: 1rem; }
-  .modal-content { padding: 2rem 1.5rem !important; }
-}
-</style>
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 1.65;
+      color: #ffffff;
+      background: linear-gradient(135deg, #1a1f2e 0%, #16213e 50%, #0f0f23 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    h1, h2, h3, h4 { 
+      font-family: 'Space Grotesk', sans-serif; 
+      font-weight: 600; 
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+    }
+    
+    h1 { font-size: clamp(2.5rem, 6vw, 4rem); }
+    h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+    h3 { font-size: 1.25rem; }
+    h4 { font-size: 1.1rem; }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    
+    /* HEADER */
+    .header {
+      text-align: center;
+      flex-shrink: 0;
+    }
+    
+    .header-content { margin-bottom: 2rem; }
+    .header-content p {
+      font-size: 0.95rem;
+      opacity: 0.85;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    
+    .tags {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1.5rem 0;
+    }
+    
+    .tag {
+      padding: 0.4rem 1.2rem;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      backdrop-filter: blur(10px);
+    }
+    
+    .nav {
+      padding: 2rem 0;
+    }
+    
+    .nav-list {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      list-style: none;
+      padding: 0;
+    }
+    
+    .nav-link {
+      display: inline-flex;
+      align-items: center;
+      padding: 1rem 1.8rem;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 25px;
+      font-weight: 500;
+      text-decoration: none;
+      color: inherit;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+    
+    .nav-link:hover {
+      background: rgba(255,255,255,0.15);
+      border-color: rgba(255,255,255,0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    
+    /* MAIN CONTENT */
+    .main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    
+    .content {
+      max-width: 800px;
+      width: 100%;
+      opacity: 1;
+      transform: translateY(0);
+      transition: all 0.4s ease;
+    }
+    
+    .content.hidden {
+      opacity: 0;
+      transform: translateY(20px);
+      pointer-events: none;
+    }
+    
+    .profile-img {
+      max-width: 300px;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+      margin: 2rem auto;
+      display: block;
+    }
+    
+    .rec {
+      margin: 2rem 0;
+      padding: 2rem;
+      background: rgba(255,255,255,0.05);
+      border-radius: 20px;
+      border-left: 4px solid #9fa8ff;
+      backdrop-filter: blur(10px);
+    }
+    
+    .email-cta {
+      text-align: center;
+      margin: 3rem 0;
+      padding: 2.5rem;
+      background: rgba(255,255,255,0.05);
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+    }
+    
+    .email-link {
+      display: inline-block;
+      padding: 1.2rem 2.5rem;
+      background: rgba(159,168,255,0.2);
+      border: 1px solid #9fa8ff;
+      border-radius: 25px;
+      color: #ffffff;
+      font-weight: 500;
+      font-size: 1.1rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .email-link:hover {
+      background: #9fa8ff;
+      color: #1a1f2e;
+      transform: translateY(-2px);
+      box-shadow: 0 15px 40px rgba(159,168,255,0.3);
+    }
+    
+    /* FOOTER */
+    .footer {
+      text-align: center;
+      opacity: 0.6;
+      font-size: 0.9rem;
+      padding: 2rem 0;
+    }
+    
+    /* MODAL OVERLAY */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15,20,35,0.98);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s ease;
+      backdrop-filter: blur(5px);
+    }
+    
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .modal-overlay .header,
+    .modal-overlay .footer {
+      opacity: 0.2;
+      filter: blur(4px);
+      pointer-events: none;
+    }
+    
+    @media (max-width: 768px) {
+      .container { padding: 1rem; }
+      .content { padding: 0 1rem; }
+      .nav-list { gap: 0.5rem; }
+      .nav-link { 
+        padding: 0.8rem 1.2rem; 
+        font-size: 0.9rem;
+      }
+    }
+  </style>
 </head>
-
-<body class="is-preload">
-  <div id="wrapper">
-    <header id="header">
-      <div class="content">
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="header-content">
         <h1>Beatriz Mestre</h1>
         <p>Philosophy of Mathematics, Cognitive Science and AI @ ULisboa</p>
         <div class="tags">
@@ -171,136 +241,142 @@ body.modal-open .modal-container {
           <span class="tag">AI &amp; Minds</span>
         </div>
       </div>
-      <nav>
-        <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#research">Research</a></li>
-          <li><a href="images/beatriz_mestre_cv_26.pdf" target="_blank">CV</a></li>
-          <li><a href="#recommendations">Recommendations</a></li>
-          <li><a href="#contact">Contact</a></li>
+      <nav class="nav">
+        <ul class="nav-list">
+          <li><a href="#about" class="nav-link" data-section="about">About</a></li>
+          <li><a href="#research" class="nav-link" data-section="research">Research</a></li>
+          <li><a href="images/beatriz_mestre_cv_26.pdf" target="_blank" class="nav-link">CV</a></li>
+          <li><a href="#recommendations" class="nav-link" data-section="recommendations">Recommendations</a></li>
+          <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
         </ul>
       </nav>
     </header>
 
-    <div id="main">
-      <!-- ABOUT / LANDING -->
-      <article id="about">
+    <main class="main">
+      <!-- ABOUT -->
+      <section id="about" class="content">
         <h2>About</h2>
         <p>Hi! I'm Beatriz :)<br>I’m a philosophy grad student based in Lisbon, working at the intersection of philosophy of mathematics, cognition, and AI.</p>
         <p>Since publishing my first paper at 21 (literature is my second passion!) and later joining the same journal as a reviewer, I became especially invested in the art of clear argumentation, careful writing, and collaborative academic work.</p>
         <p>On the Research page you'll find current projects and developing ideas that bridge technical work and conceptual analysis...</p>
-        <span class="image main"><img src="images/IMG_1.jpeg" alt="Beatriz" /></span>
+        <img src="images/IMG_1.jpeg" alt="Beatriz" class="profile-img">
         <p>This is me when I got into uni! (About 5 years ago hehe)</p>
-      </article>
+      </section>
 
-      <!-- MODAL: RESEARCH -->
-      <div id="research" class="modal-container">
-        <article class="modal-content">
-          <h2>Research</h2>
-          <p>I mainly focus on Philosophy of Mathematics and Cognitive Science.</p>
-          <div class="tags">
-            <span class="tag">Computation</span>
-            <span class="tag">Scientific Realism</span>
-            <span class="tag">Phenomenology</span>
-            <span class="tag">Strong AI</span>
-          </div>
-          <ul>
-            <li>Mathematical Cognition and innateness debates</li>
-            <li>Philosophy of Science in AI development</li>
-          </ul>
-          <p>My research explores the limits of computation in human and artificial minds...</p>
+      <!-- RESEARCH -->
+      <section id="research" class="content hidden">
+        <h2>Research</h2>
+        <p>I mainly focus on Philosophy of Mathematics and Cognitive Science.</p>
+        <div class="tags">
+          <span class="tag">Computation</span>
+          <span class="tag">Scientific Realism</span>
+          <span class="tag">Phenomenology</span>
+          <span class="tag">Strong AI</span>
+        </div>
+        <ul>
+          <li>Mathematical Cognition and innateness debates</li>
+          <li>Philosophy of Science in AI development</li>
+        </ul>
+        <p>My research explores the limits of computation in human and artificial minds...</p>
 
-          <h3>Non-philosophical work</h3>
-          <h4>Mutações Infernais: ...</h4>
-          <p><a href="https://doi.org/10.51427/com.est.2024.03.01.0009">Read it here!</a></p>
+        <h3>Non-philosophical work</h3>
+        <h4>Mutações Infernais: ...</h4>
+        <p><a href="https://doi.org/10.51427/com.est.2024.03.01.0009">Read it here!</a></p>
 
-          <h3>Other things I am working on</h3>
-          <p><a href="images/DREYFUS_AI.pdf">Dreyfus and AI — Read it here!</a></p>
-        </article>
-      </div>
+        <h3>Other things I am working on</h3>
+        <p><a href="images/DREYFUS_AI.pdf">Dreyfus and AI — Read it here!</a></p>
+      </section>
 
-      <!-- MODAL: RECOMMENDATIONS -->
-      <div id="recommendations" class="modal-container">
-        <article class="modal-content">
-          <h2>Recommendations</h2>
-          <p>Some books I've been reading or recommending for people who want to think about logic, math, and minds.</p>
+      <!-- RECOMMENDATIONS -->
+      <section id="recommendations" class="content hidden">
+        <h2>Recommendations</h2>
+        <p>Some books I've been reading or recommending for people who want to think about logic, math, and minds.</p>
 
-          <div class="rec">
-            <h3>Absolute Provability and Safe Knowledge of Axioms — Timothy Williamson</h3>
-            <p>Honestly? A great paper...</p>
-          </div>
+        <div class="rec">
+          <h3>Absolute Provability and Safe Knowledge of Axioms — Timothy Williamson</h3>
+          <p>Honestly? A great paper...</p>
+        </div>
 
-          <div class="rec">
-            <h3>An Introduction to Gödel's Theorems — Peter Smith</h3>
-            <p>The clearest guide I know to Gödel's incompleteness theorems.</p>
-          </div>
+        <div class="rec">
+          <h3>An Introduction to Gödel's Theorems — Peter Smith</h3>
+          <p>The clearest guide I know to Gödel's incompleteness theorems.</p>
+        </div>
 
-          <div class="rec">
-            <h3>Psychosemantics — Jerry Fodor</h3>
-            <p>An excellent launchpad to computation theories of mind.</p>
-          </div>
+        <div class="rec">
+          <h3>Psychosemantics — Jerry Fodor</h3>
+          <p>An excellent launchpad to computation theories of mind.</p>
+        </div>
 
-          <div class="rec">
-            <h3>Brain Bisection and The Unity of Consciousness — Thomas Nagel</h3>
-            <p>Split-brain cases and what they tell us about the mind.</p>
-          </div>
-        </article>
-      </div>
+        <div class="rec">
+          <h3>Brain Bisection and The Unity of Consciousness — Thomas Nagel</h3>
+          <p>Split-brain cases and what they tell us about the mind.</p>
+        </div>
+      </section>
 
-      <!-- MODAL: CONTACT -->
-      <div id="contact" class="modal-container">
-        <article class="modal-content">
-          <h2>Contact</h2>
-          <p>Based in Lisbon, Portugal.</p>
-          <div style="text-align:center; margin:3rem 0; padding:2rem; background:rgba(255,255,255,0.05); border-radius:24px; border:1px solid rgba(255,255,255,0.1);">
-            <p style="font-size:1.1rem; margin-bottom:1.5rem; opacity:0.9;">
-              beatrizmestre@edu.ulisboa.pt
-            </p>
-            <a href="mailto:beatrizmestre@edu.ulisboa.pt?subject=Hi%20Beatriz%20-%20From%20your%20website" class="button" style="padding:1rem 2.5rem; font-size:1.1rem;">
-              Send me an email :)
-            </a>
-          </div>
-        </article>
-      </div>
-    </div>
+      <!-- CONTACT -->
+      <section id="contact" class="content hidden">
+        <h2>Contact</h2>
+        <p>Based in Lisbon, Portugal.</p>
+        <div class="email-cta">
+          <p style="font-size: 1.1rem; margin-bottom: 1.5rem; opacity: 0.9;">
+            beatrizmestre@edu.ulisboa.pt
+          </p>
+          <a href="mailto:beatrizmestre@edu.ulisboa.pt?subject=Hi%20Beatriz%20-%20From%20your%20website" class="email-link">
+            Send me an email :)
+          </a>
+        </div>
+      </section>
+    </main>
 
-    <footer id="footer">
+    <footer class="footer">
       &copy; Beatriz Mestre. Lisbon, 2026.
     </footer>
   </div>
 
- <script>
-$(function() {
-  $('body').removeClass('is-preload');
+  <!-- MODAL OVERLAY -->
+  <div class="modal-overlay" id="overlay"></div>
 
-  $('#header nav a[href^="#"]').on('click', function(e) {
-    e.preventDefault();
-    const targetId = $(this).attr('href');
-    
-    // Just toggle body class - CSS handles everything else
-    if (targetId === '#about') {
-      $('body').removeClass('modal-open');
-    } else {
-      $('body').addClass('modal-open');
-      // Scroll to top of modal
-      $('html, body').animate({scrollTop: 0}, 300);
-    }
-  });
-
-  // ESC closes
-  $(document).on('keyup', function(e) {
-    if (e.key === 'Escape') $('body').removeClass('modal-open');
-  });
-
-  // Outside click closes
-  $(document).on('click', function(e) {
-    if ($('body').hasClass('modal-open') && !$(e.target).closest('.modal-content, #header nav').length) {
-      $('body').removeClass('modal-open');
-    }
-  });
-});
-</script>
-
-
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const sections = document.querySelectorAll('.content');
+      const navLinks = document.querySelectorAll('.nav-link[data-section]');
+      const overlay = document.getElementById('overlay');
+      
+      // Show about by default
+      showSection('about');
+      
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const section = this.getAttribute('data-section');
+          showSection(section);
+        });
+      });
+      
+      function showSection(id) {
+        sections.forEach(section => {
+          if (section.id === id) {
+            section.classList.remove('hidden');
+            overlay.classList.remove('active');
+          } else {
+            section.classList.add('hidden');
+          }
+        });
+        
+        // Close overlay if showing about
+        if (id === 'about') {
+          overlay.classList.remove('active');
+        } else {
+          overlay.classList.add('active');
+        }
+      }
+      
+      // Close on overlay click or ESC
+      overlay.addEventListener('click', () => showSection('about'));
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') showSection('about');
+      });
+    });
+  </script>
 </body>
 </html>
