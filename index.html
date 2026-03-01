@@ -49,7 +49,7 @@
       </article>
 
       <!-- MODAL: Research -->
-      <article id="work" style="display: none;">
+      <article id="work"
         <h2 class="major">Research</h2>
         <p>Specializing in epistemology, philosophy of mind, and cognitive foundations of mathematics.</p>
         <div class="tags">
@@ -63,7 +63,7 @@
       </article>
 
       <!-- MODAL: Recommendations -->
-      <article id="recommendations" style="display: none;">
+      <article id="recommendations"
         <h2 class="major">Recommendations</h2>
         <div class="rec">
           <h3>Absolute Provability - Timothy Williamson</h3>
@@ -80,7 +80,7 @@
       </article>
 
       <!-- MODAL: Contact -->
-      <article id="contact" style="display: none;">
+      <article id="contact"
         <h2 class="major">Contact</h2>
         <p>Based in Lisbon, Portugal.</p>
         <div style="text-align: center; margin: 3rem 0; padding: 2rem; background: rgba(255,255,255,0.05); border-radius: 24px; border: 1px solid rgba(255,255,255,0.1);">
@@ -105,58 +105,62 @@
 $(document).ready(function() {
   $('body').removeClass('is-preload');
   
-  // Show landing (About page)
-  function showLanding() {
+  // Hide all articles initially except intro
+  $('#main article:not(#intro)').hide();
+  $('#intro').show();
+  
+  // Open Research modal
+  $('#header nav a[href="#work"], .button[href="#work"]').on('click', function(e) {
+    e.preventDefault();
+    $('#main article').hide();
+    $('#work').show().css({'display': 'block !important'});
+    $('body').addClass('is-article-visible');
+  });
+  
+  // Open Recommendations modal  
+  $('#header nav a[href="#recommendations"]').on('click', function(e) {
+    e.preventDefault();
+    $('#main article').hide();
+    $('#recommendations').show().css({'display': 'block !important'});
+    $('body').addClass('is-article-visible');
+  });
+  
+  // Open Contact modal
+  $('#header nav a[href="#contact"]').on('click', function(e) {
+    e.preventDefault();
+    $('#main article').hide();
+    $('#contact').show().css({'display': 'block !important'});
+    $('body').addClass('is-article-visible');
+  });
+  
+  // Close to landing (About)
+  $('#header nav a[href="#intro"]').on('click', function(e) {
+    e.preventDefault();
     $('body').removeClass('is-article-visible');
     $('#main article').hide();
     $('#intro').show();
-  }
-  
-  showLanding(); // Start here
-  
-  // Research, Recommendations, Contact buttons
-  $('a[href="#work"]').click(function(e) {
-    e.preventDefault();
-    $('#main article').hide();
-    $('#work').show();
-    $('body').addClass('is-article-visible');
   });
   
-  $('a[href="#recommendations"]').click(function(e) {
-    e.preventDefault();
-    $('#main article').hide();
-    $('#recommendations').show();
-    $('body').addClass('is-article-visible');
-  });
-  
-  $('a[href="#contact"]').click(function(e) {
-    e.preventDefault();
-    $('#main article').hide();
-    $('#contact').show();
-    $('body').addClass('is-article-visible');
-  });
-  
-  // About button
-  $('a[href="#intro"]').click(function(e) {
-    e.preventDefault();
-    showLanding();
-  });
-  
-  // ESC closes modal
+  // ESC closes
   $(document).keyup(function(e) {
-    if (e.keyCode === 27) showLanding();
+    if (e.which === 27) {
+      $('body').removeClass('is-article-visible');
+      $('#main article').hide();
+      $('#intro').show();
+    }
   });
   
-  // Click outside closes modal
-  $(document).click(function(e) {
-    if ($('body').hasClass('is-article-visible')) {
-      if (!$(e.target).closest('#main article').length) {
-        showLanding();
-      }
+  // Outside click closes
+  $(document).on('click', function(e) {
+    if ($('body').hasClass('is-article-visible') && !$(e.target).closest('#main article').length) {
+      $('body').removeClass('is-article-visible');
+      $('#main article').hide();
+      $('#intro').show();
     }
   });
 });
 </script>
+
 
 </body>
 </html>
