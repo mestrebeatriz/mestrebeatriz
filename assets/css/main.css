@@ -114,3 +114,50 @@ a:hover { color: #ffffff; }
   align-items: center;
   gap: 0.5rem;
   padding: 0.85rem
+
+  /* TRUE MODAL OVERLAY WINDOWS */
+body.is-article-visible {
+  background: rgba(10, 15, 25, 0.95) !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  padding: 2rem !important;
+  overflow: auto !important;
+}
+
+body.is-article-visible #wrapper {
+  min-height: 100vh !important;
+  height: 100vh !important;
+}
+
+body.is-article-visible #header,
+body.is-article-visible #footer {
+  opacity: 0.3 !important;
+  filter: blur(8px) !important;
+  transform: scale(0.92) !important;
+  pointer-events: none !important;
+}
+
+body.is-article-visible #main {
+  height: 100vh !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 2rem 1rem !important;
+}
+
+body.is-article-visible #main article.active {
+  max-width: 650px !important;
+  max-height: 85vh !important;
+  overflow-y: auto !important;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.7) !important;
+  border-radius: 24px !important;
+  margin: 0 !important;
+}
+
+/* Landing page stays normal */
+body:not(.is-article-visible) #main article:not(#intro) { display: none !important; }
+body:not(.is-article-visible) #intro { display: block !important; }
+
